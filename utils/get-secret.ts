@@ -1,6 +1,10 @@
 import { readFileSync } from 'fs';
 
-export type SecretKeys = 'GOOGLE_CLIENT_ID' | 'GOOGLE_CLIENT_SECRET';
+export type SecretKeys =
+	| 'SECRET'
+	| 'VALID_EMAILS'
+	| 'GOOGLE_CLIENT_ID'
+	| 'GOOGLE_CLIENT_SECRET';
 
 export default function getSecret(key: SecretKeys): string {
 	let secret = process.env[key.toUpperCase()];
@@ -16,5 +20,5 @@ export default function getSecret(key: SecretKeys): string {
 			throw new Error('Secret not set');
 		}
 	}
-	return secret;
+	return secret || '';
 }
