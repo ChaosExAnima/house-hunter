@@ -1,4 +1,5 @@
 import { readFileSync } from 'fs';
+import memoizeOne from 'memoize-one';
 
 export type SecretKeys =
 	| 'SECRET'
@@ -6,7 +7,7 @@ export type SecretKeys =
 	| 'GOOGLE_CLIENT_ID'
 	| 'GOOGLE_CLIENT_SECRET';
 
-export default function getSecret(key: SecretKeys): string {
+export function getSecret(key: SecretKeys): string {
 	let secret = process.env[key.toUpperCase()];
 	if (!secret) {
 		const file = process.env[`${key.toUpperCase()}_FILE`];
@@ -22,3 +23,5 @@ export default function getSecret(key: SecretKeys): string {
 	}
 	return secret || '';
 }
+
+export default memoizeOne(getSecret);
