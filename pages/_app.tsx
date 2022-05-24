@@ -5,26 +5,32 @@ import {
 	ThemeProvider,
 	StyledEngineProvider,
 } from '@mui/material';
+import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
 
 import createEmotionCache from 'config/emotion-cache';
 import theme from 'config/theme';
 
+import type { Session } from 'next-auth';
 import type { AppProps } from 'next/app';
+
+interface AppPageProps {
+	title?: string[];
+	session?: Session;
+	[key: string]: any;
+}
 
 const clientSideEmotionCache = createEmotionCache();
 
 function App(props: AppProps & { emotionCache?: EmotionCache }) {
 	const {
 		Component: PageComponent,
-		pageProps,
+		pageProps: appPageProps,
 		emotionCache = clientSideEmotionCache,
 	} = props;
+	const { title = [], session, ...pageProps } = appPageProps as AppPageProps;
 
-	const titleParts: string[] = [
-		...(pageProps.title ?? []),
-		'House Hunter 🏹',
-	];
+	const titleParts: string[] = [...title, 'House Hunter 🏹'];
 
 	return (
 		<CacheProvider value={emotionCache}>
@@ -37,16 +43,18 @@ function App(props: AppProps & { emotionCache?: EmotionCache }) {
 			</Head>
 			<StyledEngineProvider injectFirst>
 				<ThemeProvider theme={theme}>
-					<CssBaseline />
-					<Box
-						sx={{
-							display: 'flex',
-							flexDirection: 'column',
-							minHeight: '100vh',
-						}}
-					>
-						<PageComponent {...pageProps} />
-					</Box>
+					<SessionProvider session={session}>
+						<CssBaseline />
+						<Box
+							sx={{
+								display: 'flex',
+								flexDirection: 'column',
+								minHeight: '100vh',
+							}}
+						>
+							<PageComponent {...pageProps} />
+						</Box>
+					</SessionProvider>
 				</ThemeProvider>
 			</StyledEngineProvider>
 		</CacheProvider>
