@@ -17,10 +17,13 @@ export default NextAuth({
 	],
 	callbacks: {
 		signIn({ account, profile }) {
-			if (account.provider === 'google') {
-				return (
-					!!profile.email_verified &&
-					validEmails.includes(profile.email!)
+			if (account.provider === 'google' && !!profile.email_verified) {
+				if (validEmails.includes(profile.email!)) {
+					return true;
+				}
+				console.warn(
+					`Unknown email tried logging in: ${profile.email}`,
+					profile,
 				);
 			}
 			return false;
