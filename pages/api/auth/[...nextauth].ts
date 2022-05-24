@@ -1,6 +1,7 @@
-import NextAuth, { CallbacksOptions } from 'next-auth';
-import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google';
+import NextAuth from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
 
+import theme from 'config/theme';
 import getSecret from 'utils/get-secret';
 
 const validEmails = getSecret('VALID_EMAILS')
@@ -8,7 +9,6 @@ const validEmails = getSecret('VALID_EMAILS')
 	.map((emails) => emails.trim());
 
 export default NextAuth({
-	secret: getSecret('SECRET'),
 	providers: [
 		GoogleProvider({
 			clientId: getSecret('GOOGLE_CLIENT_ID'),
@@ -28,5 +28,9 @@ export default NextAuth({
 			}
 			return false;
 		},
+	},
+	theme: {
+		colorScheme: theme.palette.mode,
+		brandColor: theme.palette.primary.main,
 	},
 });

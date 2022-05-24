@@ -10,6 +10,7 @@ import Head from 'next/head';
 
 import createEmotionCache from 'config/emotion-cache';
 import theme from 'config/theme';
+import faviconSvg from 'utils/favicon';
 
 import type { Session } from 'next-auth';
 import type { AppProps } from 'next/app';
@@ -40,6 +41,7 @@ function App(props: AppProps & { emotionCache?: EmotionCache }) {
 					name="viewport"
 					content="minimum-scale=1, initial-scale=1, width=device-width"
 				/>
+				<link rel="icon" href={`data:image/svg+xml,${faviconSvg()}`} />
 			</Head>
 			<StyledEngineProvider injectFirst>
 				<ThemeProvider theme={theme}>
