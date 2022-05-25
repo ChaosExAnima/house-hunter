@@ -2,7 +2,7 @@ import { purple, blue } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
 
 // Create a theme instance.
-const theme = createTheme( {
+const theme = createTheme({
 	typography: {
 		fontSize: 16,
 	},
@@ -24,6 +24,8 @@ const theme = createTheme( {
 			},
 		},
 	},
-} );
+});
+
+export const spacing = theme.spacing(4);
 
 export default theme;
