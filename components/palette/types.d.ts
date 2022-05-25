@@ -4,11 +4,8 @@ import { PaletteName } from 'config/palettes';
 
 export interface PaletteCommands {
 	toggleColorMode();
-	setColor(
-		newPrimary: PaletteColorOptions,
-		newSecondary: PaletteColorOptions,
-	);
-	setPalette(palette: PaletteName);
+	nextPalette();
+	getPalette(): PaletteName;
 }
 
 export interface PaletteContext extends Partial<PaletteCommands> {

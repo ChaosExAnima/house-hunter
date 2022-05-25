@@ -1,9 +1,9 @@
 import { colors, PaletteMode } from '@mui/material';
 import { createContext, useContext, useMemo, useState } from 'react';
 
-import palettes from 'config/palettes';
+import palettes, { PaletteName } from 'config/palettes';
 
-import type { PaletteColors, PaletteCommands, PaletteContext } from './types';
+import type { PaletteCommands, PaletteContext } from './types';
 
 const defaultPalette = {
 	mode: 'dark',
@@ -18,10 +18,9 @@ export const PaletteProvider = paletteContext.Provider;
 
 export function usePalette() {
 	const [mode, setMode] = useState<PaletteMode>(defaultPalette.mode);
-	const [[primary, secondary], setColors] = useState<PaletteColors>([
-		defaultPalette.primary,
-		defaultPalette.secondary,
-	]);
+	const [palette, setPalette] = useState<PaletteName>('chill');
+	const [primary, secondary] = palettes[palette];
+	const paletteNames = Object.keys(palettes) as PaletteName[];
 	const commands: PaletteCommands = useMemo(
 		() => ({
 			toggleColorMode() {
@@ -29,14 +28,21 @@ export function usePalette() {
 					prevMode === 'light' ? 'dark' : 'light',
 				);
 			},
-			setColor(newPrimary, newSecondary) {
-				setColors([newPrimary, newSecondary]);
+			nextPalette() {
+				let currentIndex = paletteNames.indexOf(palette);
+				currentIndex++;
+				if (currentIndex === paletteNames.length) {
+					currentIndex = 0;
+				}
+				console.log(`Now using palette: ${paletteNames[currentIndex]}`);
+
+				setPalette(paletteNames[currentIndex]);
 			},
-			setPalette(palette) {
-				setColors(palettes[palette]);
+			getPalette() {
+				return palette;
 			},
 		}),
-		[],
+		[palette, paletteNames],
 	);
 	return {
 		palette: {
