@@ -1,5 +1,11 @@
 import GoogleIcon from '@mui/icons-material/google';
-import { Button, CircularProgress, Paper, Typography } from '@mui/material';
+import {
+	Box,
+	Button,
+	CircularProgress,
+	Paper,
+	Typography,
+} from '@mui/material';
 import { signIn, useSession } from 'next-auth/react';
 
 import Logo from 'components/logo';
@@ -11,7 +17,18 @@ export default function Home() {
 	if (status === 'loading') {
 		return (
 			<Page>
-				<CircularProgress />
+				<Box
+					sx={{
+						display: 'flex',
+						mx: 'auto',
+						flexDirection: 'column',
+						alignItems: 'center',
+						justifyContent: 'center',
+						flexGrow: 1,
+					}}
+				>
+					<CircularProgress size="5em" thickness={2} />
+				</Box>
 			</Page>
 		);
 	}

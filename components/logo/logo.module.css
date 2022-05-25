@@ -1,0 +1,28 @@
+@keyframes rainbow {
+	0% {
+		fill: red;
+	}
+
+	15% {
+		fill: orange;
+	}
+	30% {
+		fill: yellow;
+	}
+	45% {
+		fill: green;
+	}
+	60% {
+		fill: blue;
+	}
+	75% {
+		fill: purple;
+	}
+	100% {
+		fill: red;
+	}
+}
+
+.rainbow {
+	animation: rainbow 5s infinite;
+}

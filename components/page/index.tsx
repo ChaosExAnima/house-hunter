@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Container } from '@mui/material';
 
 import type { PageProps } from './types';
 
@@ -10,10 +10,11 @@ export default function Page({ maxWidth = 'md', children }: PageProps) {
 				display: 'flex',
 				flexDirection: 'column',
 				flexGrow: 1,
+				minHeight: '100vh',
 			}}
 			component="main"
 		>
-			<Box flexGrow="1">{children}</Box>
+			{children}
 		</Container>
 	);
 }

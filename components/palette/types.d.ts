@@ -1,11 +1,14 @@
 import { PaletteColorOptions, PaletteOptions } from '@mui/material';
 
+import { PaletteName } from 'config/palettes';
+
 export interface PaletteCommands {
-	toggleColorMode: () => void;
-	setColor: (
+	toggleColorMode();
+	setColor(
 		newPrimary: PaletteColorOptions,
 		newSecondary: PaletteColorOptions,
-	) => void;
+	);
+	setPalette(palette: PaletteName);
 }
 
 export interface PaletteContext extends Partial<PaletteCommands> {
