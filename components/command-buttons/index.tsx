@@ -1,5 +1,6 @@
-import { DarkMode, LightMode } from '@mui/icons-material';
+import { DarkMode, LightMode, Logout } from '@mui/icons-material';
 import { Box, colors, Fab } from '@mui/material';
+import { signOut, useSession } from 'next-auth/react';
 
 import { usePalettePicker } from 'components/palette';
 import { PaletteName } from 'config/palettes';
@@ -14,6 +15,7 @@ export default function CommandButtons() {
 		getPalette,
 		palette: { mode },
 	} = usePalettePicker();
+	const { status } = useSession();
 	const modeColor =
 		mode === 'light' ? colors.yellow[100] : colors.blueGrey[800];
 	const palette = getPalette();
@@ -32,6 +34,11 @@ export default function CommandButtons() {
 			}}
 			className={styles.wrapper}
 		>
+			{status === 'authenticated' && (
+				<Fab onClick={() => signOut()} color="secondary">
+					<Logout />
+				</Fab>
+			)}
 			<Fab
 				onClick={() => nextPalette()}
 				color="primary"
