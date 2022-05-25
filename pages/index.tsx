@@ -2,6 +2,7 @@ import GoogleIcon from '@mui/icons-material/google';
 import { Button, CircularProgress, Paper, Typography } from '@mui/material';
 import { signIn, useSession } from 'next-auth/react';
 
+import Logo from 'components/logo';
 import Page from 'components/page';
 import { spacing } from 'config/theme';
 
@@ -18,6 +19,7 @@ export default function Home() {
 	return (
 		<Page maxWidth="sm">
 			<Paper sx={{ padding: spacing, margin: spacing }}>
+				<Logo />
 				<Typography variant="h2" textAlign="center">
 					{status === 'authenticated' &&
 						`Welcome, ${firstName || 'Human'}!`}

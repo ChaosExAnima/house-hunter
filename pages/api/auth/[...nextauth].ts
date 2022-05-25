@@ -1,12 +1,14 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
-import theme from 'config/theme';
+import makeTheme from 'config/theme';
 import getSecret from 'utils/get-secret';
 
 const validEmails = getSecret('VALID_EMAILS')
 	.split(',')
 	.map((emails) => emails.trim());
+
+const theme = makeTheme();
 
 export default NextAuth({
 	providers: [

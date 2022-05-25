@@ -1,11 +1,6 @@
 import { Box, Container } from '@mui/material';
-import { ContainerProps } from '@mui/material';
-import { ReactNode } from 'react';
 
-interface PageProps {
-	maxWidth?: ContainerProps['maxWidth'];
-	children: ReactNode;
-}
+import type { PageProps } from './types';
 
 export default function Page({ maxWidth = 'md', children }: PageProps) {
 	return (

@@ -18,7 +18,7 @@ export default class HealthPortal extends Document {
 				<Head>
 					<meta
 						name="theme-color"
-						content={theme.palette.primary.main}
+						content={theme().palette.primary.main}
 					/>
 					<link
 						rel="stylesheet"
