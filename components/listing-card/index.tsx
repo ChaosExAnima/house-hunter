@@ -6,6 +6,7 @@ import {
 	Chip,
 	Typography,
 } from '@mui/material';
+import classNames from 'classnames';
 import Image from 'next/image';
 import { useMemo } from 'react';
 
@@ -49,6 +50,9 @@ export default function ListingCard({
 							objectFit="cover"
 							alt={`Image of ${listing.address}`}
 							sizes={size}
+							className={classNames({
+								[styles.defaultImage]: !imageSrc,
+							})}
 						/>
 					</div>
 				</CardMedia>

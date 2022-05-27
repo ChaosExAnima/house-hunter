@@ -1,28 +1,34 @@
+import { Skeleton, Stack } from '@mui/material';
 import { useQuery } from 'react-query';
 
 import ListingCard from 'components/listing-card';
-import Loader from 'components/loader';
 import { fetchApi } from 'utils/fetch';
 
 import type { ListingListProps } from './types';
 import type { PlaceIndex } from 'pages/api/place/types';
 
-export default function ListingList({ height }: ListingListProps) {
-	const { data, error, status } = useQuery('/place', () =>
-		fetchApi<PlaceIndex>('/place'),
+export default function ListingList({ height, limit = 10 }: ListingListProps) {
+	const { data, error, status } = useQuery(`/place?limit=${limit}`, () =>
+		fetchApi<PlaceIndex>(`/place?limit=${limit}`),
 	);
 	if (status === 'loading' || status === 'idle') {
-		return <Loader />;
+		return (
+			<Stack spacing={2}>
+				{[...Array(limit)].map((num) => (
+					<Skeleton key={num} variant="rectangular" height={150} />
+				))}
+			</Stack>
+		);
 	}
 	if (error) {
 		console.log(error);
 	}
 
 	return (
-		<div>
+		<Stack spacing={2}>
 			{data?.places.map((place) => (
 				<ListingCard key={place.id} listing={place} height={height} />
 			))}
-		</div>
+		</Stack>
 	);
 }

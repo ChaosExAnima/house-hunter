@@ -22,7 +22,12 @@ export default function Home() {
 	return (
 		<Page>
 			<Logo />
-			<Typography variant="h2" textAlign="center" mb={spacing}>
+			<Typography
+				variant="h3"
+				component="h1"
+				textAlign="center"
+				mb={spacing}
+			>
 				{status === 'authenticated' &&
 					`Welcome, ${firstName || 'Human'}!`}
 				{status === 'unauthenticated' && 'Log in:'}
@@ -40,8 +45,7 @@ export default function Home() {
 				<>
 					<Divider />
 					<Menu />
-					<Divider />
-					<ListingList height="slim" />
+					<ListingList height="slim" limit={3} />
 				</>
 			)}
 		</Page>
