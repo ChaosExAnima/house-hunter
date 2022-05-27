@@ -2,6 +2,7 @@ import GoogleIcon from '@mui/icons-material/google';
 import { Button, Divider, Typography } from '@mui/material';
 import { signIn, useSession } from 'next-auth/react';
 
+import ListingList from 'components/listing-list';
 import Loader from 'components/loader';
 import Logo from 'components/logo';
 import Menu from 'components/menu';
@@ -39,6 +40,8 @@ export default function Home() {
 				<>
 					<Divider />
 					<Menu />
+					<Divider />
+					<ListingList />
 				</>
 			)}
 		</Page>

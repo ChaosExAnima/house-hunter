@@ -13,5 +13,6 @@
 			"alphabetize": {"order": "asc"}
 		}],
 		"unused-imports/no-unused-imports": "error"
-	}
+	},
+	"ignorePatterns": []
 }

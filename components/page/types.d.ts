@@ -1,7 +1,7 @@
-import { ContainerProps } from '@mui/material';
+import { Breakpoint } from '@mui/material';
 
 interface PageProps {
-	maxWidth?: ContainerProps['maxWidth'];
+	maxWidth?: Breakpoint;
 	children: ReactNode;
 	margin?: boolean;
 	paper?: boolean;

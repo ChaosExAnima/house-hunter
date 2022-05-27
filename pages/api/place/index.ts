@@ -1,3 +1,4 @@
+import listings from 'data/listing-fixtures';
 import { checkAuth, checkMethod, errorResponse } from 'utils/api';
 
 import type { ApiResponse, PlaceIndex } from './types';
@@ -12,7 +13,7 @@ export default async function placeHandler(
 		await checkAuth(req);
 		res.json({
 			error: false,
-			places: [],
+			places: listings,
 		});
 	} catch (err) {
 		errorResponse(err, res);

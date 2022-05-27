@@ -1,5 +1,7 @@
 import { NextApiResponse } from 'next';
 
+import { Listing } from 'data/types';
+
 export type Method = 'GET' | 'POST' | 'PUT';
 export type ApiResponse<Response extends ApiSuccessResponse> = NextApiResponse<
 	Response | ApiErrorResponse
@@ -19,7 +21,7 @@ export interface ApiErrorResponse extends ApiResponseBase {
 }
 
 export interface PlaceIndex extends ApiSuccessResponse {
-	places: [];
+	places: Listing[];
 }
 
 export interface PlaceDetail extends ApiSuccessResponse {
