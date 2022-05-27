@@ -8,6 +8,7 @@ import {
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
 import { useMemo } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import CommandButtons from 'components/command-buttons';
 import { PaletteProvider, usePalette } from 'components/palette';
@@ -25,6 +26,7 @@ interface AppPageProps {
 }
 
 const clientSideEmotionCache = createEmotionCache();
+const queryClient = new QueryClient();
 
 function App(props: AppProps & { emotionCache?: EmotionCache }) {
 	const {
@@ -55,17 +57,19 @@ function App(props: AppProps & { emotionCache?: EmotionCache }) {
 				<PaletteProvider value={{ palette, ...commands }}>
 					<ThemeProvider theme={theme}>
 						<SessionProvider session={session}>
-							<CssBaseline />
-							<Box
-								sx={{
-									display: 'flex',
-									flexDirection: 'column',
-									minHeight: '100vh',
-								}}
-							>
-								<PageComponent {...pageProps} />
-								<CommandButtons />
-							</Box>
+							<QueryClientProvider client={queryClient}>
+								<CssBaseline />
+								<Box
+									sx={{
+										display: 'flex',
+										flexDirection: 'column',
+										minHeight: '100vh',
+									}}
+								>
+									<PageComponent {...pageProps} />
+									<CommandButtons />
+								</Box>
+							</QueryClientProvider>
 						</SessionProvider>
 					</ThemeProvider>
 				</PaletteProvider>
