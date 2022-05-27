@@ -1,6 +1,7 @@
 import { Skeleton, Stack } from '@mui/material';
 import { useQuery } from 'react-query';
 
+import ErrorDisplay from 'components/error-display';
 import ListingCard from 'components/listing-card';
 import { fetchApi } from 'utils/fetch';
 
@@ -21,7 +22,7 @@ export default function ListingList({ height, limit = 10 }: ListingListProps) {
 		);
 	}
 	if (error) {
-		console.log(error);
+		return <ErrorDisplay error={error} />;
 	}
 
 	return (

@@ -1,8 +1,9 @@
-import { Alert, Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect } from 'react';
 import { useMutation } from 'react-query';
 
+import ErrorDisplay from 'components/error-display';
 import Loader from 'components/loader';
 import Page from 'components/page';
 import theme from 'config/theme';
@@ -44,9 +45,7 @@ export default function NewPlace() {
 					mt={topMargin}
 					noValidate
 				>
-					{error instanceof Error && (
-						<Alert severity="error">Error: {error.message}</Alert>
-					)}
+					<ErrorDisplay error={error} />
 					<TextField
 						type="url"
 						name={fieldName}
