@@ -1,3 +1,5 @@
+import { NextApiResponse } from 'next';
+
 export type Method = 'GET' | 'POST' | 'PUT';
 export type ApiResponse<Response extends ApiSuccessResponse> = NextApiResponse<
 	Response | ApiErrorResponse
@@ -20,8 +22,10 @@ export interface PlaceIndex extends ApiSuccessResponse {
 	places: [];
 }
 
-export interface PlaceReviewCount extends ApiSuccessResponse {
-	count: number;
+export interface PlaceDetail extends ApiSuccessResponse {
+	place: {
+		address: string;
+	};
 }
 
 export interface PlaceNew extends ApiSuccessResponse {
