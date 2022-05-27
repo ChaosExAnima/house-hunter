@@ -34,6 +34,6 @@ export default NextAuth({
 	theme: {
 		colorScheme: 'dark',
 		brandColor: theme.palette.primary.main,
-		logo: `${process.env.NEXTAUTH_URL}/house.svg`,
+		logo: `${process.env.NEXTAUTH_URL}/android-chrome-512x512.png`,
 	},
 });
