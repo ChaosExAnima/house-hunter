@@ -4,6 +4,9 @@
 	height: 100%;
 }
 
-.media {
-	height: 200px;
+.chip {
+	position: absolute;
+	z-index: 1;
+	top: 1em;
+	right: 1em;
 }

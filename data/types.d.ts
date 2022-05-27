@@ -5,6 +5,7 @@ export interface Person {
 export interface Listing {
 	id: string;
 	address: string;
+	slug: string;
 	active: boolean;
 	links: string[];
 	neighborhood: string;

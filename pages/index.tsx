@@ -41,7 +41,7 @@ export default function Home() {
 					<Divider />
 					<Menu />
 					<Divider />
-					<ListingList />
+					<ListingList height="slim" />
 				</>
 			)}
 		</Page>

@@ -2,7 +2,10 @@ import { Breakpoint } from '@mui/material';
 
 import { Listing } from 'data/types';
 
-interface ListingCardProps {
+export type ListingCardHeight = 'slim' | 'normal';
+
+export interface ListingCardProps {
 	listing: Listing;
 	maxWidth?: Breakpoint;
+	height?: ListingCardHeight;
 }
