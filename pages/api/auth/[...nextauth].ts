@@ -32,7 +32,8 @@ export default NextAuth({
 		},
 	},
 	theme: {
-		colorScheme: theme.palette.mode,
+		colorScheme: 'dark',
 		brandColor: theme.palette.primary.main,
+		logo: `${process.env.NEXTAUTH_URL}/house.svg`,
 	},
 });
