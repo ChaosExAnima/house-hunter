@@ -1,4 +1,4 @@
-import GoogleIcon from '@mui/icons-material/google';
+import { Google as GoogleIcon } from '@mui/icons-material';
 import { Button, Divider, Typography } from '@mui/material';
 import { signIn, useSession } from 'next-auth/react';
 
