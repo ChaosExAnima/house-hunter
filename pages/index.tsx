@@ -1,9 +1,10 @@
 import GoogleIcon from '@mui/icons-material/google';
-import { Button, Typography } from '@mui/material';
+import { Button, Divider, Typography } from '@mui/material';
 import { signIn, useSession } from 'next-auth/react';
 
 import Loader from 'components/loader';
 import Logo from 'components/logo';
+import Menu from 'components/menu';
 import Page from 'components/page';
 import { spacing } from 'config/theme';
 
@@ -20,7 +21,7 @@ export default function Home() {
 	return (
 		<Page>
 			<Logo />
-			<Typography variant="h2" textAlign="center">
+			<Typography variant="h2" textAlign="center" mb={spacing}>
 				{status === 'authenticated' &&
 					`Welcome, ${firstName || 'Human'}!`}
 				{status === 'unauthenticated' && 'Log in:'}
@@ -33,6 +34,12 @@ export default function Home() {
 					Sign in with&nbsp;
 					<GoogleIcon />
 				</Button>
+			)}
+			{status === 'authenticated' && (
+				<>
+					<Divider />
+					<Menu />
+				</>
 			)}
 		</Page>
 	);
