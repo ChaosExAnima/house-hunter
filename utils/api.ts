@@ -3,8 +3,8 @@ import { getToken } from 'next-auth/jwt';
 import { AuthError, StatusError } from './errors';
 import getSecret from './get-secret';
 
-import type { ApiErrorResponse } from './types';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import type { ApiErrorResponse, Method } from 'pages/api/place/types';
 
 const secret = getSecret('NEXTAUTH_SECRET');
 
@@ -26,6 +26,12 @@ export function errorResponse(
 		error: true,
 		message,
 	});
+}
+
+export function checkMethod(req: NextApiRequest, method: Method = 'GET') {
+	if (req.method !== method) {
+		throw new StatusError('Invalid method', 400);
+	}
 }
 
 export async function checkAuth(req: NextApiRequest) {
