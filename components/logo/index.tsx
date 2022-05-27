@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 import { usePalettePicker } from 'components/palette';
 
-import styles from './logo.module.css';
+import styles from './style.module.css';
 
 export default function Logo() {
 	const { getPalette } = usePalettePicker();
