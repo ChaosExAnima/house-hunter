@@ -14,6 +14,6 @@ export interface Listing {
 	agent?: string;
 	fee?: number;
 	contact?: Person;
-	comments: Map<Person, string[]>;
-	ratings: Map<Person, number>;
+	comments: Record<string, string[]>;
+	ratings: Record<string, number>;
 }

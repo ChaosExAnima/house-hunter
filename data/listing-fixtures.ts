@@ -15,8 +15,8 @@ const listings: Listing[] = [
 		neighborhood: 'Crown Heights',
 		price: 4_725,
 		images: [],
-		comments: new Map(),
-		ratings: new Map(),
+		comments: {},
+		ratings: { 'echognyc@gmail.com': 0.5 },
 	},
 	{
 		id: 'test2',
@@ -30,8 +30,8 @@ const listings: Listing[] = [
 		neighborhood: 'Stuy Heights',
 		price: 8_000,
 		images: [],
-		comments: new Map(),
-		ratings: new Map(),
+		comments: {},
+		ratings: {},
 	},
 	{
 		id: 'test3',
@@ -47,8 +47,8 @@ const listings: Listing[] = [
 		images: [
 			'https://photos.zillowstatic.com/fp/6f0990af642be5bb972a98f0bdcd58ef-se_large_800_400.webp',
 		],
-		comments: new Map(),
-		ratings: new Map(),
+		comments: {},
+		ratings: {},
 	},
 ];
 

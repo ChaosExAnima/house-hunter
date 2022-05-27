@@ -15,8 +15,8 @@ export default function ListingList({ height, limit = 10 }: ListingListProps) {
 	if (status === 'loading' || status === 'idle') {
 		return (
 			<Stack spacing={2}>
-				{[...Array(limit)].map((num) => (
-					<Skeleton key={num} variant="rectangular" height={150} />
+				{[...Array(limit)].map((_num, index) => (
+					<Skeleton key={index} variant="rectangular" height={150} />
 				))}
 			</Stack>
 		);

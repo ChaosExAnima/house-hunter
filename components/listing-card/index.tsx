@@ -4,6 +4,9 @@ import {
 	CardContent,
 	CardMedia,
 	Chip,
+	Divider,
+	Rating,
+	Stack,
 	Typography,
 } from '@mui/material';
 import classNames from 'classnames';
@@ -31,12 +34,27 @@ export default function ListingCard({
 			(theme().breakpoints.unit ?? 'px'),
 		[maxWidth],
 	);
+	const { ratings } = listing;
+
+	const rating = useMemo(() => {
+		const values = Object.values(ratings);
+		if (!values.length) {
+			return null;
+		}
+		return values.reduce((a, b) => a + b, 0) / values.length;
+	}, [ratings]);
+	console.log('ratings:', ratings, rating);
 	const imageSrc = listing.images.at(0);
 	return (
 		<Card>
 			<CardActionArea onClick={onClick}>
 				<CardMedia sx={{ height: height === 'normal' ? 300 : 150 }}>
-					<div className={styles.mediaWrapper}>
+					<div
+						className={classNames({
+							[styles.mediaWrapper]: true,
+							[styles.defaultImage]: !imageSrc,
+						})}
+					>
 						<Chip
 							label="New"
 							color="primary"
@@ -50,9 +68,6 @@ export default function ListingCard({
 							objectFit="cover"
 							alt={`Image of ${listing.address}`}
 							sizes={size}
-							className={classNames({
-								[styles.defaultImage]: !imageSrc,
-							})}
 						/>
 					</div>
 				</CardMedia>
@@ -60,11 +75,26 @@ export default function ListingCard({
 					<Typography variant="h5" gutterBottom component="p">
 						{listing.address}
 					</Typography>
-					<Typography variant="body2" color="text.secondary">
-						{currency(listing.price)}
-						&nbsp;-&nbsp;
-						{listing.neighborhood}
-					</Typography>
+					<Stack
+						direction="row"
+						divider={<Divider orientation="vertical" flexItem />}
+						spacing={2}
+						justifyContent="flex-start"
+					>
+						<Typography variant="body2" color="text.secondary">
+							{currency(listing.price)}
+						</Typography>
+						<Typography
+							variant="body2"
+							color="text.secondary"
+							flexGrow={1}
+						>
+							{listing.neighborhood}
+						</Typography>
+						{rating !== null && (
+							<Rating value={rating} precision={0.5} readOnly />
+						)}
+					</Stack>
 				</CardContent>
 			</CardActionArea>
 		</Card>
