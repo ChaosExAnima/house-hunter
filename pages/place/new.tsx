@@ -1,19 +1,29 @@
 import { Alert, Box, Button, TextField, Typography } from '@mui/material';
-import { FormEvent } from 'react';
+import { useRouter } from 'next/router';
+import { FormEvent, useEffect } from 'react';
 import { useMutation } from 'react-query';
 
 import Loader from 'components/loader';
 import Page from 'components/page';
 import theme from 'config/theme';
+import { fetchApi } from 'utils/fetch';
+
+import type { PlaceNew } from 'pages/api/place/types';
 
 const fieldName = 'placeLink';
 
 const topMargin = theme().spacing(2);
 
 export default function NewPlace() {
-	const { mutate, status, error } = useMutation((url: string) =>
-		fetch('/api/place', { method: 'post', body: url }),
+	const { mutate, status, error, data } = useMutation((url: string) =>
+		fetchApi<PlaceNew>('/place/new', { method: 'post', body: url }),
 	);
+	const router = useRouter();
+	useEffect(() => {
+		if (data && data.address) {
+			router.push(`/place/${data.address}`);
+		}
+	});
 	const submit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const formdata = new FormData(event.currentTarget);
@@ -28,7 +38,12 @@ export default function NewPlace() {
 			<Typography variant="h2">Add a new place</Typography>
 			<Loader show={status === 'loading'} />
 			{(status === 'error' || status === 'idle') && (
-				<Box onSubmit={submit} component="form" mt={topMargin}>
+				<Box
+					onSubmit={submit}
+					component="form"
+					mt={topMargin}
+					noValidate
+				>
 					{error instanceof Error && (
 						<Alert severity="error">Error: {error.message}</Alert>
 					)}

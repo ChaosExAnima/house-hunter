@@ -9,6 +9,7 @@ import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
 import { useMemo } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 import CommandButtons from 'components/command-buttons';
 import { PaletteProvider, usePalette } from 'components/palette';
@@ -69,6 +70,10 @@ function App(props: AppProps & { emotionCache?: EmotionCache }) {
 									<PageComponent {...pageProps} />
 									<CommandButtons />
 								</Box>
+								<ReactQueryDevtools
+									initialIsOpen={false}
+									position="bottom-right"
+								/>
 							</QueryClientProvider>
 						</SessionProvider>
 					</ThemeProvider>
