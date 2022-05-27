@@ -2,6 +2,7 @@ import { readFileSync } from 'fs';
 import memoizeOne from 'memoize-one';
 
 export type SecretKeys =
+	| 'NEXTAUTH_SECRET'
 	| 'VALID_EMAILS'
 	| 'GOOGLE_CLIENT_ID'
 	| 'GOOGLE_CLIENT_SECRET';

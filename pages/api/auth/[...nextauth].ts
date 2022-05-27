@@ -9,8 +9,10 @@ const validEmails = getSecret('VALID_EMAILS')
 	.map((emails) => emails.trim());
 
 const theme = makeTheme();
+const secret = getSecret('NEXTAUTH_SECRET');
 
 export default NextAuth({
+	secret,
 	providers: [
 		GoogleProvider({
 			clientId: getSecret('GOOGLE_CLIENT_ID'),
