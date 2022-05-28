@@ -6,6 +6,7 @@ export default function ErrorDisplay({
 	error,
 	severity = 'error',
 	prefix = 'Error',
+	gutterBottom,
 	...props
 }: ErrorDisplayProps) {
 	if (!error) {
@@ -19,7 +20,7 @@ export default function ErrorDisplay({
 	}
 
 	return (
-		<Alert {...props} severity={severity}>
+		<Alert {...props} severity={severity} sx={{ mb: gutterBottom ? 2 : 0 }}>
 			{prefix}: {message}
 		</Alert>
 	);

@@ -29,7 +29,7 @@ export default function Price({
 		return price;
 	}, [amount, noDollar]);
 	return (
-		<Typography {...props} color={color}>
+		<Typography {...props} color={color} component="span">
 			{text}
 		</Typography>
 	);

@@ -4,7 +4,7 @@ import {
 	AttachMoney as MoneyIcon,
 	SquareFoot as SqFootIcon,
 } from '@mui/icons-material';
-import { Skeleton, Typography } from '@mui/material';
+import { Alert, Skeleton, Typography } from '@mui/material';
 import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 
@@ -13,8 +13,10 @@ import DetailsList from 'components/details-list';
 import ErrorDisplay from 'components/error-display';
 import ImagesCarousel from 'components/images-carousel';
 import Link from 'components/link';
+import LinkList from 'components/link-list';
 import Page from 'components/page';
 import Price from 'components/price';
+import { Listing } from 'data/types';
 import { fetchApi } from 'utils/fetch';
 import { useSessionCheck } from 'utils/hooks';
 import { currency } from 'utils/text';
@@ -65,19 +67,26 @@ export default function PlaceDetails({
 				<ImagesCarousel images={place.images} />
 			)}
 			<Page maxWidth="md">
-				<ErrorDisplay error={error} />
+				<ErrorDisplay error={error} gutterBottom />
+				{!error && <Alerts status={place.status} />}
 				<Breadcrumbs
 					items={[{ href: '/place', text: 'Places' }, place.address]}
 				/>
 				<Typography variant="h3" component="h1" gutterBottom>
 					{place.address}
 				</Typography>
+				<LinkList links={place.links} />
 				<DetailsList
 					items={[
 						{
 							icon: <MoneyIcon />,
 							tooltip: 'Monthy rent',
-							text: <Price amount={place.price} noDollar />,
+							text: (
+								<Typography>
+									<Price amount={place.price} noDollar /> a
+									month
+								</Typography>
+							),
 							subtext: priceSubtext,
 							force: true,
 						},
@@ -171,4 +180,22 @@ function PlaceDetailsLost() {
 			</Typography>
 		</Page>
 	);
+}
+
+function Alerts({ status }: Pick<Listing, 'status'>) {
+	let text = '';
+	if (status === 'gone') {
+		text = 'This listing is no longer active.';
+	} else if (status === 'veto') {
+		text = 'The listing has been vetoed.';
+	}
+
+	if (text) {
+		return (
+			<Alert severity="warning" sx={{ mb: '1em' }}>
+				{text}
+			</Alert>
+		);
+	}
+	return null;
 }
