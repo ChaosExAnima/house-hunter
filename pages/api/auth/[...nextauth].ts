@@ -14,8 +14,8 @@ const theme = makeTheme();
 const secret = getSecret('NEXTAUTH_SECRET');
 
 const redis = new Redis({
-	url: getSecret('UPSTASH_REDIS_REST_TOKEN'),
-	token: getSecret('UPSTASH_REDIS_REST_URL'),
+	url: getSecret('UPSTASH_REDIS_REST_URL'),
+	token: getSecret('UPSTASH_REDIS_REST_TOKEN'),
 });
 
 const scope = [
