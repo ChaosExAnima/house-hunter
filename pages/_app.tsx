@@ -41,7 +41,7 @@ function App(props: AppProps & { emotionCache?: EmotionCache }) {
 	const { palette, ...commands } = usePalette();
 	const theme = useMemo(() => makeTheme(palette), [palette]);
 
-	const titleParts: string[] = [...title, 'House Hunter 🏹'];
+	const titleParts: string[] = [...title, 'House Hunter'];
 
 	return (
 		<CacheProvider value={emotionCache}>
