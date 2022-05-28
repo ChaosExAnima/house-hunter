@@ -1,15 +1,24 @@
 /// <reference types="node" />
 
-declare namespace NodeJS {
-	interface ProcessEnv {
-		readonly GOOGLE_CLIENT_ID?: string;
-		readonly GOOGLE_CLIENT_SECRET?: string;
-		readonly GOOGLE_CLIENT_ID_FILE?: string;
-		readonly GOOGLE_CLIENT_SECRET_FILE?: string;
-		readonly NEXT_PUBLIC_BUDGET?: string;
-	}
+type EnvKeys =
+	| 'VALID_EMAILS'
+	| 'NEXTAUTH_SECRET'
+	| 'GOOGLE_CLIENT_ID'
+	| 'GOOGLE_CLIENT_SECRET'
+	| 'NEXT_PUBLIC_BUDGET'
+	| 'UPSTASH_REDIS_URL'
+	| 'UPSTASH_REDIS_TOKEN'
+	| 'UPSTASH_REDIS_PREFIX';
+
+interface EnvVariables {
+	readonly [key in EnvKeys]?: string;
 }
 
+declare namespace NodeJS {
+	interface ProcessEnv extends EnvVariables {}
+}
+
+// General types
 interface Image {
 	src: string;
 	alt?: string;

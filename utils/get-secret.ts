@@ -1,16 +1,10 @@
 import { readFileSync } from 'fs';
-import memoizeOne from 'memoize-one';
+import mem from 'mem';
 
-export type SecretKeys =
-	| 'NEXTAUTH_SECRET'
-	| 'VALID_EMAILS'
-	| 'GOOGLE_CLIENT_ID'
-	| 'GOOGLE_CLIENT_SECRET';
-
-export function getSecret(key: SecretKeys): string {
-	let secret = process.env[key.toUpperCase()];
+export function getSecret(key: EnvKeys): string {
+	let secret = process.env[key];
 	if (!secret) {
-		const file = process.env[`${key.toUpperCase()}_FILE`];
+		const file = process.env[`${key}_FILE`];
 		if (file) {
 			try {
 				secret = readFileSync(file, 'utf-8');
@@ -24,4 +18,4 @@ export function getSecret(key: SecretKeys): string {
 	return secret || '';
 }
 
-export default memoizeOne(getSecret);
+export default mem(getSecret);

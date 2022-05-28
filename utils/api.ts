@@ -1,12 +1,10 @@
 import { getToken } from 'next-auth/jwt';
 
 import { AuthError, StatusError } from './errors';
-import getSecret from './get-secret';
+import { getSecret } from './get-secret';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { ApiErrorResponse, Method } from 'pages/api/place/types';
-
-const secret = getSecret('NEXTAUTH_SECRET');
 
 export function errorResponse(
 	error: unknown,
@@ -35,6 +33,7 @@ export function checkMethod(req: NextApiRequest, method: Method = 'GET') {
 }
 
 export async function checkAuth(req: NextApiRequest) {
+	const secret = getSecret('NEXTAUTH_SECRET');
 	const token = await getToken({ req, secret });
 	if (!token) {
 		throw new AuthError();
