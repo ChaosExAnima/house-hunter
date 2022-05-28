@@ -32,7 +32,9 @@ export default function PlaceDetails({
 	const { place } = data;
 	return (
 		<>
-			<ImagesCarousel images={place.images} />
+			{place.images.length !== 0 && (
+				<ImagesCarousel images={place.images} />
+			)}
 			<Page maxWidth="md">
 				<ErrorDisplay error={error} />
 				<Breadcrumbs

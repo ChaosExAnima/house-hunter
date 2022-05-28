@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { FormEvent, useEffect } from 'react';
 import { useMutation } from 'react-query';
 
+import Breadcrumbs from 'components/breadcrumbs';
 import ErrorDisplay from 'components/error-display';
 import Loader from 'components/loader';
 import Page from 'components/page';
@@ -36,6 +37,7 @@ export default function NewPlace() {
 
 	return (
 		<Page maxWidth="md">
+			<Breadcrumbs items={[{ href: '/place', text: 'Places' }, 'New']} />
 			<Typography variant="h2">Add a new place</Typography>
 			<Loader show={status === 'loading'} />
 			{(status === 'error' || status === 'idle') && (
