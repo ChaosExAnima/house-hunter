@@ -19,7 +19,7 @@ export default function ErrorDisplay({
 	}
 
 	return (
-		<Alert {...props} {...severity}>
+		<Alert {...props} severity={severity}>
 			{prefix}: {message}
 		</Alert>
 	);
