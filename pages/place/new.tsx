@@ -9,6 +9,7 @@ import Loader from 'components/loader';
 import Page from 'components/page';
 import theme from 'config/theme';
 import { fetchApi } from 'utils/fetch';
+import { useSessionCheck } from 'utils/hooks';
 
 import type { PlaceNew } from 'pages/api/place/types';
 
@@ -17,6 +18,7 @@ const fieldName = 'placeLink';
 const topMargin = theme().spacing(2);
 
 export default function NewPlace() {
+	const isLoggedIn = useSessionCheck();
 	const { mutate, status, error, data } = useMutation((url: string) =>
 		fetchApi<PlaceNew>('/place/new', { method: 'post', body: url }),
 	);
@@ -26,6 +28,11 @@ export default function NewPlace() {
 			router.push(`/place/${data.address}`);
 		}
 	});
+
+	if (!isLoggedIn) {
+		return null;
+	}
+
 	const submit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const formdata = new FormData(event.currentTarget);

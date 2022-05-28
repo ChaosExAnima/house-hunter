@@ -16,6 +16,7 @@ import Link from 'components/link';
 import Page from 'components/page';
 import Price from 'components/price';
 import { fetchApi } from 'utils/fetch';
+import { useSessionCheck } from 'utils/hooks';
 import { currency } from 'utils/text';
 
 import type { PlaceDetailsProps } from './types';
@@ -30,6 +31,7 @@ import type { PlaceDetail } from 'pages/api/place/types';
 export default function PlaceDetails({
 	id,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+	const isLoggedIn = useSessionCheck();
 	const { status, data, error } = useQuery(`/place/${id}`, () =>
 		fetchApi<PlaceDetail>(`/place/${id}`),
 	);
@@ -49,7 +51,8 @@ export default function PlaceDetails({
 		}
 		return null;
 	}, [data]);
-	if (status === 'loading') {
+
+	if (status === 'loading' || !isLoggedIn) {
 		return <PlaceDetailsSkeleton />;
 	}
 	if (!data) {
