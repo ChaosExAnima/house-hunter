@@ -1,0 +1,3 @@
+interface LoadingContextProps {
+	value?: boolean;
+}

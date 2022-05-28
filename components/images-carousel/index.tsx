@@ -6,12 +6,15 @@ import {
 	DialogContent,
 	IconButton,
 	Paper,
+	Skeleton,
 	Zoom,
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import Image from 'next/image';
 import { forwardRef, useCallback, useEffect, useState } from 'react';
 import Carousel from 'react-mui-carousel-artemm';
+
+import useLoading from 'components/loading-context';
 
 import styles from './styles.module.css';
 
@@ -21,6 +24,7 @@ export default function ImagesCarousel({
 	images,
 	...props
 }: ImagesCarouselProps) {
+	const loading = useLoading();
 	const [open, setOpen] = useState(false);
 	const [currentIndex, setIndex] = useState(0);
 	const openOverlay = () => setOpen(true);
@@ -28,7 +32,7 @@ export default function ImagesCarousel({
 
 	const changeChild = useCallback(
 		(event: KeyboardEvent) => {
-			if (!open) {
+			if (!open || !images) {
 				return;
 			}
 			if (event.key === 'ArrowLeft') {
@@ -47,6 +51,19 @@ export default function ImagesCarousel({
 			document.removeEventListener('keydown', changeChild);
 		};
 	});
+
+	if (loading) {
+		return (
+			<Skeleton
+				variant="rectangular"
+				height={400}
+				width={800}
+				sx={{ margin: '0 auto' }}
+			/>
+		);
+	} else if (!images || images.length === 0) {
+		return null;
+	}
 
 	return (
 		<>

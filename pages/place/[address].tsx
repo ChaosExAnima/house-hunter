@@ -14,6 +14,7 @@ import ErrorDisplay from 'components/error-display';
 import ImagesCarousel from 'components/images-carousel';
 import Link from 'components/link';
 import LinkList from 'components/link-list';
+import { Loading } from 'components/loading-context';
 import Page from 'components/page';
 import Price from 'components/price';
 import { Listing } from 'data/types';
@@ -54,28 +55,29 @@ export default function PlaceDetails({
 		return null;
 	}, [data]);
 
-	if (status === 'loading' || !isLoggedIn) {
-		return <PlaceDetailsSkeleton />;
-	}
-	if (!data) {
+	const loading = status === 'loading' || !isLoggedIn;
+
+	if (!data && !loading) {
 		return <PlaceDetailsLost />;
 	}
-	const { place } = data;
+	const { place } = data ?? {};
 	return (
-		<>
-			{place.images.length !== 0 && (
-				<ImagesCarousel images={place.images} />
-			)}
+		<Loading value={loading}>
+			<ImagesCarousel images={place?.images} />
 			<Page maxWidth="md">
 				<ErrorDisplay error={error} gutterBottom />
-				{!error && <Alerts status={place.status} />}
+				{!error && place && <Alerts status={place.status} />}
 				<Breadcrumbs
-					items={[{ href: '/place', text: 'Places' }, place.address]}
+					items={[
+						{ href: '/place', text: 'Places' },
+						place?.address ?? '',
+					]}
 				/>
 				<Typography variant="h3" component="h1" gutterBottom>
-					{place.address}
+					{loading && <Skeleton />}
+					{!loading && place?.address}
 				</Typography>
-				<LinkList links={place.links} />
+				<LinkList links={place?.links ?? []} />
 				<DetailsList
 					items={[
 						{
@@ -83,8 +85,11 @@ export default function PlaceDetails({
 							tooltip: 'Monthy rent',
 							text: (
 								<Typography>
-									<Price amount={place.price} noDollar /> a
-									month
+									<Price
+										amount={place?.price ?? 0}
+										noDollar
+									/>{' '}
+									a month
 								</Typography>
 							),
 							subtext: priceSubtext,
@@ -93,24 +98,24 @@ export default function PlaceDetails({
 						{
 							icon: <BedIcon />,
 							tooltip: 'Bedrooms',
-							text: place.bedrooms,
+							text: place?.bedrooms,
 							force: true,
 						},
 						{
 							icon: <BathIcon />,
 							tooltip: 'Bathrooms',
-							text: place.bathrooms,
+							text: place?.bathrooms,
 							force: true,
 						},
 						{
 							icon: <SqFootIcon />,
 							tooltip: 'Square feet',
-							text: place.sqfeet,
+							text: place?.sqfeet,
 						},
 					]}
 				/>
 			</Page>
-		</>
+		</Loading>
 	);
 }
 
@@ -148,24 +153,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 		paths: listings.map(({ slug }) => `/place/${slug}`),
 		fallback: true,
 	};
-}
-
-function PlaceDetailsSkeleton() {
-	return (
-		<>
-			<Skeleton
-				variant="rectangular"
-				height={400}
-				width={800}
-				sx={{ margin: '0 auto' }}
-			/>
-			<Page maxWidth="md">
-				<Typography variant="h3" component="h1">
-					<Skeleton />
-				</Typography>
-			</Page>
-		</>
-	);
 }
 
 function PlaceDetailsLost() {

@@ -3,13 +3,17 @@ import {
 	ListItem,
 	ListItemIcon,
 	ListItemText,
+	Skeleton,
 	Tooltip,
 } from '@mui/material';
 import { useMemo } from 'react';
 
+import useLoading from 'components/loading-context';
+
 import { DetailsListProps } from './types';
 
 export default function DetailsList({ items }: DetailsListProps) {
+	const loading = useLoading();
 	const filteredItems = useMemo(
 		() => items.filter(({ text, force }) => force || text),
 		[items],
@@ -19,15 +23,30 @@ export default function DetailsList({ items }: DetailsListProps) {
 			{filteredItems.map((item) => (
 				<ListItem key={`${item.text}-${item.tooltip}`}>
 					<ListItemIcon>
-						{item.tooltip && (
+						{loading && (
+							<Skeleton
+								variant="circular"
+								width={27}
+								height={27}
+							/>
+						)}
+						{!loading && item.tooltip && (
 							<Tooltip title={item.tooltip}>{item.icon}</Tooltip>
 						)}
-						{!item.tooltip && item.icon}
+						{!loading && !item.tooltip && item.icon}
 					</ListItemIcon>
-					<ListItemText
-						primary={item.text ?? 'Unknown'}
-						secondary={item.subtext}
-					/>
+					{!loading && (
+						<ListItemText
+							primary={item.text ?? 'Unknown'}
+							secondary={item.subtext}
+						/>
+					)}
+					{loading && (
+						<ListItemText
+							primary={<Skeleton />}
+							secondary={item.subtext && <Skeleton />}
+						/>
+					)}
 				</ListItem>
 			))}
 		</List>

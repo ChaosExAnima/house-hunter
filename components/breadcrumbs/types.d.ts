@@ -5,6 +5,13 @@ interface Breadcrumb {
 	text: string;
 }
 
+type BreadcrumbItem = Breadcrumb | string | undefined;
+
 interface BreadcrumbProps extends MuiBreadcrumbProps {
-	items: Array<Breadcrumb | string>;
+	items: BreadcrumbItem[];
+}
+
+interface BreadcrumbProp {
+	item: BreadcrumbItem;
+	loading: boolean;
 }

@@ -1,9 +1,21 @@
 import { Launch as LaunchIcon } from '@mui/icons-material';
-import { Button, ButtonGroup } from '@mui/material';
+import { Button, ButtonGroup, Skeleton } from '@mui/material';
+
+import useLoading from 'components/loading-context';
 
 import { LinkListProps } from './types';
 
 export default function LinkList({ links }: LinkListProps) {
+	const loading = useLoading();
+	if (loading) {
+		return (
+			<Skeleton
+				variant="rectangular"
+				height={40}
+				sx={{ maxWidth: 270 }}
+			/>
+		);
+	}
 	return (
 		<ButtonGroup>
 			{links.map((link) => (
