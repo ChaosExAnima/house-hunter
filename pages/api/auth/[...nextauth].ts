@@ -18,6 +18,12 @@ const redis = new Redis({
 	token: getSecret('UPSTASH_REDIS_TOKEN'),
 });
 
+const scope = [
+	'profile',
+	'email',
+	'https://www.googleapis.com/auth/spreadsheets',
+].join(' ');
+
 export default NextAuth({
 	secret,
 	adapter: UpstashRedisAdapter(redis, {
@@ -27,6 +33,7 @@ export default NextAuth({
 		GoogleProvider({
 			clientId: getSecret('GOOGLE_CLIENT_ID'),
 			clientSecret: getSecret('GOOGLE_CLIENT_SECRET'),
+			authorization: { params: { scope } },
 		}),
 	],
 	callbacks: {
