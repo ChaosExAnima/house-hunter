@@ -1,6 +1,7 @@
 import { Skeleton, Typography } from '@mui/material';
 import { useQuery } from 'react-query';
 
+import Breadcrumbs from 'components/breadcrumbs';
 import ErrorDisplay from 'components/error-display';
 import ImagesCarousel from 'components/images-carousel';
 import Link from 'components/link';
@@ -34,6 +35,9 @@ export default function PlaceDetails({
 			<ImagesCarousel images={place.images} />
 			<Page maxWidth="md">
 				<ErrorDisplay error={error} />
+				<Breadcrumbs
+					items={[{ href: '/place', text: 'Places' }, place.address]}
+				/>
 				<Typography variant="h3" component="h1">
 					{place.address}
 				</Typography>
