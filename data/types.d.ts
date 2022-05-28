@@ -2,14 +2,19 @@ export interface Person {
 	name: string;
 }
 
+export type ListingStatus = 'active' | 'gone' | 'veto';
+
 export interface Listing {
 	id: string;
 	address: string;
 	slug: string;
-	active: boolean;
+	status: ListingStatus;
 	links: string[];
-	neighborhood: string;
 	price: number;
+	bedrooms?: number;
+	bathrooms?: number;
+	sqfeet?: number;
+	neighborhood: string;
 	images: Image[];
 	agent?: string;
 	fee?: number;

@@ -6,6 +6,7 @@ declare namespace NodeJS {
 		readonly GOOGLE_CLIENT_SECRET?: string;
 		readonly GOOGLE_CLIENT_ID_FILE?: string;
 		readonly GOOGLE_CLIENT_SECRET_FILE?: string;
+		readonly NEXT_PUBLIC_BUDGET?: string;
 	}
 }
 

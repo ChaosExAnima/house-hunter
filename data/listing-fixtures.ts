@@ -7,7 +7,7 @@ const listings: Listing[] = [
 		id: 'test1',
 		address: '1460 Carroll St #2R',
 		slug: slugify('1460 Carroll St #2R'),
-		active: true,
+		status: 'gone',
 		links: [
 			'https://www.zillow.com/homedetails/1460-Carroll-St-2R-Brooklyn-NY-11213/2064161700_zpid/',
 			'https://streeteasy.com/building/1460-carroll-street-brooklyn/2r',
@@ -22,7 +22,7 @@ const listings: Listing[] = [
 		id: 'test2',
 		address: '967 Greene Ave ',
 		slug: slugify('967 Greene Ave '),
-		active: true,
+		status: 'active',
 		links: [
 			'https://www.zillow.com/homedetails/1460-Carroll-St-2R-Brooklyn-NY-11213/2064161700_zpid/',
 			'https://streeteasy.com/building/1460-carroll-street-brooklyn/2r',
@@ -37,7 +37,7 @@ const listings: Listing[] = [
 		id: 'test3',
 		address: '2715 Farragut Rd',
 		slug: slugify('2715 Farragut Rd'),
-		active: true,
+		status: 'active',
 		links: [
 			'https://www.zillow.com/homedetails/1460-Carroll-St-2R-Brooklyn-NY-11213/2064161700_zpid/',
 			'https://streeteasy.com/building/1460-carroll-street-brooklyn/2r',

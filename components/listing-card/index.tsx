@@ -13,9 +13,9 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import { useMemo } from 'react';
 
+import Price from 'components/price';
 import theme from 'config/theme';
 import { useLink } from 'utils/hooks';
-import { currency } from 'utils/text';
 
 import defaultImage from './default.jpg';
 import styles from './style.module.css';
@@ -80,9 +80,7 @@ export default function ListingCard({
 						spacing={2}
 						justifyContent="flex-start"
 					>
-						<Typography variant="body2" color="text.secondary">
-							{currency(listing.price)}
-						</Typography>
+						<Price amount={listing.price} variant="body2" />
 						<Typography
 							variant="body2"
 							color="text.secondary"

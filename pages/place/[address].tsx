@@ -1,12 +1,22 @@
+import {
+	KingBed as BedIcon,
+	Bathtub as BathIcon,
+	AttachMoney as MoneyIcon,
+	SquareFoot as SqFootIcon,
+} from '@mui/icons-material';
 import { Skeleton, Typography } from '@mui/material';
+import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 
 import Breadcrumbs from 'components/breadcrumbs';
+import DetailsList from 'components/details-list';
 import ErrorDisplay from 'components/error-display';
 import ImagesCarousel from 'components/images-carousel';
 import Link from 'components/link';
 import Page from 'components/page';
+import Price from 'components/price';
 import { fetchApi } from 'utils/fetch';
+import { currency } from 'utils/text';
 
 import type { PlaceDetailsProps } from './types';
 import type {
@@ -23,6 +33,22 @@ export default function PlaceDetails({
 	const { status, data, error } = useQuery(`/place/${id}`, () =>
 		fetchApi<PlaceDetail>(`/place/${id}`),
 	);
+	const priceSubtext = useMemo(() => {
+		const budget = Number.parseInt(
+			process.env.NEXT_PUBLIC_BUDGET ?? '5000',
+		);
+		if (!data) {
+			return '';
+		}
+		const cost = data.place.price;
+
+		if (cost > budget) {
+			return `${currency(cost - budget)} over budget`;
+		} else if (cost < budget) {
+			return `${currency(budget - cost)} under budget`;
+		}
+		return null;
+	}, [data]);
 	if (status === 'loading') {
 		return <PlaceDetailsSkeleton />;
 	}
@@ -40,9 +66,37 @@ export default function PlaceDetails({
 				<Breadcrumbs
 					items={[{ href: '/place', text: 'Places' }, place.address]}
 				/>
-				<Typography variant="h3" component="h1">
+				<Typography variant="h3" component="h1" gutterBottom>
 					{place.address}
 				</Typography>
+				<DetailsList
+					items={[
+						{
+							icon: <MoneyIcon />,
+							tooltip: 'Monthy rent',
+							text: <Price amount={place.price} noDollar />,
+							subtext: priceSubtext,
+							force: true,
+						},
+						{
+							icon: <BedIcon />,
+							tooltip: 'Bedrooms',
+							text: place.bedrooms,
+							force: true,
+						},
+						{
+							icon: <BathIcon />,
+							tooltip: 'Bathrooms',
+							text: place.bathrooms,
+							force: true,
+						},
+						{
+							icon: <SqFootIcon />,
+							tooltip: 'Square feet',
+							text: place.sqfeet,
+						},
+					]}
+				/>
 			</Page>
 		</>
 	);
@@ -86,11 +140,19 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 
 function PlaceDetailsSkeleton() {
 	return (
-		<Page maxWidth="md">
-			<Typography variant="h3" component="h1">
-				<Skeleton />
-			</Typography>
-		</Page>
+		<>
+			<Skeleton
+				variant="rectangular"
+				height={400}
+				width={800}
+				sx={{ margin: '0 auto' }}
+			/>
+			<Page maxWidth="md">
+				<Typography variant="h3" component="h1">
+					<Skeleton />
+				</Typography>
+			</Page>
+		</>
 	);
 }
 
