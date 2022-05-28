@@ -1,5 +1,8 @@
 export function slugify(input: string): string {
-	return input.replace(/[^\-a-z0-9]+/gi, '-').toLowerCase();
+	return input
+		.trim()
+		.replace(/[^\-a-z0-9]+/gi, '-')
+		.toLowerCase();
 }
 
 const formatter = new Intl.NumberFormat('en-US', {

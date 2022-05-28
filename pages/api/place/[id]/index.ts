@@ -1,4 +1,6 @@
+import listings from 'data/listing-fixtures';
 import { checkAuth, checkMethod, errorResponse } from 'utils/api';
+import { StatusError } from 'utils/errors';
 
 import type { ApiResponse, PlaceDetail } from '../types';
 import type { NextApiRequest } from 'next';
@@ -10,11 +12,13 @@ export default async function placeAddressHandler(
 	try {
 		checkMethod(req);
 		await checkAuth(req);
+		const place = listings.find(({ id }) => id === req.query.id);
+		if (!place) {
+			throw new StatusError('Could not find listing', 404);
+		}
 		res.json({
 			error: false,
-			place: {
-				address: 'nowhere',
-			},
+			place,
 		});
 	} catch (err) {
 		errorResponse(err, res);

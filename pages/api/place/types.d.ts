@@ -25,9 +25,7 @@ export interface PlaceIndex extends ApiSuccessResponse {
 }
 
 export interface PlaceDetail extends ApiSuccessResponse {
-	place: {
-		address: string;
-	};
+	place: Listing;
 }
 
 export interface PlaceNew extends ApiSuccessResponse {
