@@ -14,8 +14,8 @@ const theme = makeTheme();
 const secret = getSecret('NEXTAUTH_SECRET');
 
 const redis = new Redis({
-	url: getSecret('UPSTASH_REDIS_URL'),
-	token: getSecret('UPSTASH_REDIS_TOKEN'),
+	url: getSecret('UPSTASH_REDIS_REST_TOKEN'),
+	token: getSecret('UPSTASH_REDIS_REST_URL'),
 });
 
 const scope = [
@@ -27,7 +27,7 @@ const scope = [
 export default NextAuth({
 	secret,
 	adapter: UpstashRedisAdapter(redis, {
-		baseKeyPrefix: getSecret('UPSTASH_REDIS_PREFIX'),
+		baseKeyPrefix: getSecret('UPSTASH_REDIS_REST_PREFIX'),
 	}),
 	providers: [
 		GoogleProvider({

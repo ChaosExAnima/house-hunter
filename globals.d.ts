@@ -7,9 +7,9 @@ type EnvKeys =
 	| 'GOOGLE_CLIENT_ID'
 	| 'GOOGLE_CLIENT_SECRET'
 	| 'NEXT_PUBLIC_BUDGET'
-	| 'UPSTASH_REDIS_URL'
-	| 'UPSTASH_REDIS_TOKEN'
-	| 'UPSTASH_REDIS_PREFIX';
+	| 'UPSTASH_REDIS_REST_URL'
+	| 'UPSTASH_REDIS_REST_TOKEN'
+	| 'UPSTASH_REDIS_REST_PREFIX';
 
 interface EnvVariables {
 	readonly [key in EnvKeys]?: string;
