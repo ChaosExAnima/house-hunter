@@ -43,7 +43,6 @@ export default function ListingCard({
 		}
 		return values.reduce((a, b) => a + b, 0) / values.length;
 	}, [ratings]);
-	console.log('ratings:', ratings, rating);
 	const imageSrc = listing.images.at(0);
 	return (
 		<Card>
