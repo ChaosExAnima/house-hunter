@@ -62,7 +62,7 @@ export default function ListingCard({
 							clickable
 						/>
 						<Image
-							src={imageSrc || defaultImage}
+							src={imageSrc?.src || defaultImage}
 							layout="fill"
 							objectFit="cover"
 							alt={`Image of ${listing.address}`}
