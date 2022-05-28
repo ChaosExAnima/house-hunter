@@ -23,6 +23,7 @@ export default NextAuth({
 		signIn({ account, profile }) {
 			if (account.provider === 'google' && !!profile.email_verified) {
 				if (validEmails.includes(profile.email!)) {
+					console.log(`User logged in: ${profile.email}`);
 					return true;
 				}
 				console.warn(
