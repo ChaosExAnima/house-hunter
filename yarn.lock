@@ -311,6 +311,13 @@
     prop-types "^15.8.1"
     react-is "^17.0.2"
 
+"@next-auth/upstash-redis-adapter@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@next-auth/upstash-redis-adapter/-/upstash-redis-adapter-3.0.0.tgz#ddde7a141e6e48e1a0143e71c7060b871d4706b9"
+  integrity sha512-MQIM03nJKNkr9KK0AWH4rDuFeCTaFtvD++l30hfJIyPZUV4STL4GX3TYTbOEOgCcw/AiGHTLhNXGk5/CDJJ3kg==
+  dependencies:
+    uuid "^8.3.2"
+
 "@next/env@12.1.6":
   version "12.1.6"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-12.1.6.tgz#5f44823a78335355f00f1687cfc4f1dafa3eca08"
@@ -522,6 +529,13 @@
   dependencies:
     "@typescript-eslint/types" "5.26.0"
     eslint-visitor-keys "^3.3.0"
+
+"@upstash/redis@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@upstash/redis/-/redis-1.4.0.tgz#4a682fc9a68b3c37b6ae5339eb653598062c8081"
+  integrity sha512-1512ao/RdNzQOB/kXrevD3ZVbYbjBSc2Cx3JWGm9/Zj8bdDc/D0Ni9RDXHFNPQ7S06GdfYx+aYyNpY1XYAeNXw==
+  dependencies:
+    isomorphic-fetch "^3.0.0"
 
 acorn-jsx@^5.3.2:
   version "5.3.2"
@@ -1591,6 +1605,14 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
 
+isomorphic-fetch@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/isomorphic-fetch/-/isomorphic-fetch-3.0.0.tgz#0267b005049046d2421207215d45d6a262b8b8b4"
+  integrity sha512-qvUtwJ3j6qwsF3jLxkZ72qCgjMysPzDfeV240JHiGZsANBYd+EEuu35v7dfrJ9Up0Ak07D7GGSkGhCHTqg/5wA==
+  dependencies:
+    node-fetch "^2.6.1"
+    whatwg-fetch "^3.4.1"
+
 jose@^4.1.4, jose@^4.3.7:
   version "4.8.1"
   resolved "https://registry.yarnpkg.com/jose/-/jose-4.8.1.tgz#dc7c2660b115ba29b44880e588c5ac313c158247"
@@ -1700,6 +1722,13 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+map-age-cleaner@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/map-age-cleaner/-/map-age-cleaner-0.1.3.tgz#7d583a7306434c055fe474b0f45078e6e1b4b92a"
+  integrity sha512-bJzx6nMoP6PDLPBFmg7+xRKeFZvFboMrGlxmNj9ClvX53KrmvM5bXFXEWjbz4cz1AFn+jWJ9z/DJSz7hrs0w3w==
+  dependencies:
+    p-defer "^1.0.0"
+
 match-sorter@^6.0.2:
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/match-sorter/-/match-sorter-6.3.1.tgz#98cc37fda756093424ddf3cbc62bfe9c75b92bda"
@@ -1708,10 +1737,13 @@ match-sorter@^6.0.2:
     "@babel/runtime" "^7.12.5"
     remove-accents "0.4.2"
 
-memoize-one@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-6.0.0.tgz#b2591b871ed82948aee4727dc6abceeeac8c1045"
-  integrity sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==
+mem@^9.0.2:
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/mem/-/mem-9.0.2.tgz#bbc2d40be045afe30749681e8f5d554cee0c0354"
+  integrity sha512-F2t4YIv9XQUBHt6AOJ0y7lSmP1+cY7Fm1DRh9GClTGzKST7UWLMx6ly9WZdLH/G/ppM5RL4MlQfRT71ri9t19A==
+  dependencies:
+    map-age-cleaner "^0.1.3"
+    mimic-fn "^4.0.0"
 
 merge2@^1.3.0, merge2@^1.4.1:
   version "1.4.1"
@@ -1730,6 +1762,11 @@ microseconds@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/microseconds/-/microseconds-0.2.0.tgz#233b25f50c62a65d861f978a4a4f8ec18797dc39"
   integrity sha512-n7DHHMjR1avBbSpsTBj6fmMGh2AGrifVV4e+WYc3Q9lO+xnSZ3NyhcBND3vzzatt05LFhoKFRxrIyklmLlUtyA==
+
+mimic-fn@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-4.0.0.tgz#60a90550d5cb0b239cca65d893b1a53b29871ecc"
+  integrity sha512-vqiC06CuhBTUdZH+RYl8sFrL096vA45Ok5ISO6sE/Mr1jRbGH4Csnhi8f3wKVl7x8mO4Au7Ir9D3Oyv1VYMFJw==
 
 minimatch@^3.0.4, minimatch@^3.1.1, minimatch@^3.1.2:
   version "3.1.2"
@@ -1820,6 +1857,13 @@ next@12.1.6:
     "@next/swc-win32-arm64-msvc" "12.1.6"
     "@next/swc-win32-ia32-msvc" "12.1.6"
     "@next/swc-win32-x64-msvc" "12.1.6"
+
+node-fetch@^2.6.1:
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
+  integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
+  dependencies:
+    whatwg-url "^5.0.0"
 
 oauth@^0.9.15:
   version "0.9.15"
@@ -1934,6 +1978,11 @@ optionator@^0.9.1:
     prelude-ls "^1.2.1"
     type-check "^0.4.0"
     word-wrap "^1.2.3"
+
+p-defer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/p-defer/-/p-defer-1.0.0.tgz#9f6eb182f6c9aa8cd743004a7d4f96b196b0fb0c"
+  integrity sha1-n26xgvbJqozXQwBKfU+WsZaw+ww=
 
 p-limit@^1.1.0:
   version "1.3.0"
@@ -2410,6 +2459,11 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
+tr46@~0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
+  integrity sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=
+
 tsconfig-paths@^3.14.1:
   version "3.14.1"
   resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.14.1.tgz#ba0734599e8ea36c862798e920bcf163277b137a"
@@ -2493,6 +2547,24 @@ v8-compile-cache@^2.0.3:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.3.0.tgz#2de19618c66dc247dcfb6f99338035d8245a2cee"
   integrity sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==
+
+webidl-conversions@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
+  integrity sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE=
+
+whatwg-fetch@^3.4.1:
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.6.2.tgz#dced24f37f2624ed0281725d51d0e2e3fe677f8c"
+  integrity sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA==
+
+whatwg-url@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
+  integrity sha1-lmRU6HZUYuN2RNNib2dCzotwll0=
+  dependencies:
+    tr46 "~0.0.3"
+    webidl-conversions "^3.0.0"
 
 which-boxed-primitive@^1.0.2:
   version "1.0.2"

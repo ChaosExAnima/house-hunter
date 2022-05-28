@@ -1,3 +1,5 @@
+import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter';
+import { Redis } from '@upstash/redis';
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
@@ -11,12 +13,27 @@ const validEmails = getSecret('VALID_EMAILS')
 const theme = makeTheme();
 const secret = getSecret('NEXTAUTH_SECRET');
 
+const redis = new Redis({
+	url: getSecret('UPSTASH_REDIS_REST_URL'),
+	token: getSecret('UPSTASH_REDIS_REST_TOKEN'),
+});
+
+const scope = [
+	'profile',
+	'email',
+	'https://www.googleapis.com/auth/spreadsheets',
+].join(' ');
+
 export default NextAuth({
 	secret,
+	adapter: UpstashRedisAdapter(redis, {
+		baseKeyPrefix: getSecret('UPSTASH_REDIS_REST_PREFIX'),
+	}),
 	providers: [
 		GoogleProvider({
 			clientId: getSecret('GOOGLE_CLIENT_ID'),
 			clientSecret: getSecret('GOOGLE_CLIENT_SECRET'),
+			authorization: { params: { scope } },
 		}),
 	],
 	callbacks: {

@@ -1,4 +1,4 @@
-import { ApiErrorResponse, ApiSuccessResponse } from 'pages/api/place/types';
+import type { ApiErrorResponse, ApiSuccessResponse } from 'globals';
 
 export async function fetchApi<Response extends ApiSuccessResponse>(
 	uri: string,

@@ -1,6 +1,6 @@
 import { checkAuth, checkMethod, errorResponse } from 'utils/api';
 
-import type { ApiResponse, ApiSuccessResponse } from '../types';
+import type { ApiResponse, ApiSuccessResponse } from 'globals';
 import type { NextApiRequest } from 'next';
 
 export default async function placeReviewHandler(

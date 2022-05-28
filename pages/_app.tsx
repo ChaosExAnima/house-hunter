@@ -57,9 +57,9 @@ function App(props: AppProps & { emotionCache?: EmotionCache }) {
 			<StyledEngineProvider injectFirst>
 				<PaletteProvider value={{ palette, ...commands }}>
 					<ThemeProvider theme={theme}>
+						<CssBaseline />
 						<SessionProvider session={session}>
 							<QueryClientProvider client={queryClient}>
-								<CssBaseline />
 								<Box
 									sx={{
 										display: 'flex',
