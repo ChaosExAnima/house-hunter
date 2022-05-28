@@ -19,6 +19,7 @@ const redis = new Redis({
 });
 
 const scope = [
+	'openid',
 	'profile',
 	'email',
 	'https://www.googleapis.com/auth/spreadsheets',
