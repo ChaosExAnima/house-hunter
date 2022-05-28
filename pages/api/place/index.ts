@@ -1,7 +1,8 @@
 import listings from 'data/listing-fixtures';
 import { checkAuth, checkMethod, errorResponse } from 'utils/api';
 
-import type { ApiResponse, PlaceIndex } from './types';
+import type { PlaceIndex } from './types';
+import type { ApiResponse } from 'globals';
 import type { NextApiRequest } from 'next';
 
 export default async function placeHandler(

@@ -1,4 +1,5 @@
 /// <reference types="node" />
+import { NextApiResponse } from 'next';
 
 type EnvKeys =
 	| 'VALID_EMAILS'
@@ -22,4 +23,23 @@ declare namespace NodeJS {
 interface Image {
 	src: string;
 	alt?: string;
+}
+
+// API
+export type Method = 'GET' | 'POST' | 'PUT';
+export type ApiResponse<Response extends ApiSuccessResponse> = NextApiResponse<
+	Response | ApiErrorResponse
+>;
+
+interface ApiResponseBase {
+	error: boolean;
+}
+
+export interface ApiSuccessResponse {
+	error: false;
+}
+
+export interface ApiErrorResponse extends ApiResponseBase {
+	error: true;
+	message: string;
 }

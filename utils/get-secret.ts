@@ -1,6 +1,8 @@
 import { readFileSync } from 'fs';
 import mem from 'mem';
 
+import type { EnvKeys } from 'globals';
+
 export function getSecret(key: EnvKeys): string {
 	let secret = process.env[key];
 	if (!secret) {

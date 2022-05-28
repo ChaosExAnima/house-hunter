@@ -3,8 +3,8 @@ import { getToken } from 'next-auth/jwt';
 import { AuthError, StatusError } from './errors';
 import { getSecret } from './get-secret';
 
+import type { ApiErrorResponse, Method } from 'globals';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { ApiErrorResponse, Method } from 'pages/api/place/types';
 
 export function errorResponse(
 	error: unknown,

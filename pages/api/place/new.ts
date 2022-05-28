@@ -1,7 +1,8 @@
 import { checkAuth, checkMethod, errorResponse } from 'utils/api';
 import { StatusError } from 'utils/errors';
 
-import type { ApiResponse, PlaceNew } from './types';
+import type { PlaceNew } from './types';
+import type { ApiResponse } from 'globals';
 import type { NextApiRequest } from 'next';
 
 export default async function placeNewHandler(

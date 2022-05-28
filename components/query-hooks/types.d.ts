@@ -1,0 +1,3 @@
+interface UsePlacesProps {
+	limit?: number;
+}
