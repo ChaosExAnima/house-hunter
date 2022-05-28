@@ -1,0 +1,19 @@
+.wrapper {
+	margin: 0 auto;
+	width: 100vw;
+	max-width: 800px;
+}
+
+.item {
+	position: relative;
+	height: 400px;
+	width: 100vw;
+	max-width: 800px;
+}
+
+.dialogActions {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	z-index: 1;
+}

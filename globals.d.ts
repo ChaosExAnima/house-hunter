@@ -8,3 +8,8 @@ declare namespace NodeJS {
 		readonly GOOGLE_CLIENT_SECRET_FILE?: string;
 	}
 }
+
+interface Image {
+	src: string;
+	alt?: string;
+}

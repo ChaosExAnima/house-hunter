@@ -45,7 +45,18 @@ const listings: Listing[] = [
 		neighborhood: 'Flatbush',
 		price: 4_500,
 		images: [
-			'https://photos.zillowstatic.com/fp/6f0990af642be5bb972a98f0bdcd58ef-se_large_800_400.webp',
+			{
+				src: 'https://photos.zillowstatic.com/fp/6f0990af642be5bb972a98f0bdcd58ef-se_large_800_400.webp',
+			},
+			{
+				src: 'https://photos.zillowstatic.com/fp/60d1db1667f2243a47854f7b8d58024f-se_large_800_400.webp',
+			},
+			{
+				src: 'https://photos.zillowstatic.com/fp/e1351ba113673f9d76ef7b6a792f5993-se_large_800_400.webp',
+			},
+			{
+				src: 'https://photos.zillowstatic.com/fp/9cb51b20fb0ce042b0f95b267e02c8a2-se_large_800_400.webp',
+			},
 		],
 		comments: {},
 		ratings: {},

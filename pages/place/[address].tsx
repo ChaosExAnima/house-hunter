@@ -2,6 +2,7 @@ import { Skeleton, Typography } from '@mui/material';
 import { useQuery } from 'react-query';
 
 import ErrorDisplay from 'components/error-display';
+import ImagesCarousel from 'components/images-carousel';
 import Link from 'components/link';
 import Page from 'components/page';
 import { fetchApi } from 'utils/fetch';
@@ -30,8 +31,9 @@ export default function PlaceDetails({
 	const { place } = data;
 	return (
 		<>
-			<ErrorDisplay error={error} />
+			<ImagesCarousel images={place.images} />
 			<Page maxWidth="md">
+				<ErrorDisplay error={error} />
 				<Typography variant="h3" component="h1">
 					{place.address}
 				</Typography>

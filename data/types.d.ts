@@ -10,7 +10,7 @@ export interface Listing {
 	links: string[];
 	neighborhood: string;
 	price: number;
-	images: string[];
+	images: Image[];
 	agent?: string;
 	fee?: number;
 	contact?: Person;
