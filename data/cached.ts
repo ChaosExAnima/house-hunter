@@ -6,6 +6,7 @@ import Data from './data';
 export default abstract class CachedData extends Data {
 	private redis;
 	protected readonly prefix = this.constructor.name.toLowerCase();
+	protected readonly defaultTtl = MINUTE_IN_SECONDS * 15;
 
 	public constructor(protected readonly useCache = true) {
 		super();
@@ -24,7 +25,7 @@ export default abstract class CachedData extends Data {
 	protected async setCache<Value = any>(
 		key: string,
 		value: Value,
-		ttl = MINUTE_IN_SECONDS * 15,
+		ttl = this.defaultTtl,
 	): Promise<Value | null> {
 		return this.redis.set(this.cacheKey(key), value, {
 			ex: ttl,

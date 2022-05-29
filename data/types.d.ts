@@ -1,8 +1,8 @@
 import { GoogleSpreadsheetRow } from 'google-spreadsheet';
 
-export type ListingStatus = 'active' | 'gone' | 'veto';
+type ListingStatus = 'active' | 'gone' | 'veto';
 
-export interface SheetListing extends GoogleSpreadsheetRow {
+interface SheetListing extends GoogleSpreadsheetRow {
 	Link?: string;
 	'Second link'?: string;
 	Address?: string;
@@ -11,7 +11,7 @@ export interface SheetListing extends GoogleSpreadsheetRow {
 	'Person In Contact'?: string;
 }
 
-export interface RowListing {
+interface RowListing {
 	id: string;
 	row: number;
 	slug: string;
@@ -28,11 +28,29 @@ export interface RowListing {
 	fee?: number;
 }
 
-export interface Listing extends RowListing {
+interface Listing extends RowListing {
 	address: string;
 	price: number;
 	neighborhood: string;
 	bedrooms?: number;
 	bathrooms?: number;
 	sqfeet?: number;
+}
+
+type JobState = 'queued' | 'working' | 'complete' | 'error';
+
+interface Job {
+	id: string;
+	type: string;
+	created: number; // Timestamp.
+	state: JobState;
+	error?: Error;
+}
+
+interface RemoteJob extends Job {
+	target: string;
+}
+
+interface StreetEasyJob extends RemoteJob {
+	type: 'streeteasy';
 }
