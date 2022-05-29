@@ -1,8 +1,9 @@
 import { getSession } from 'next-auth/react';
 
 import { AuthError, StatusError } from './errors';
+import getSecret from './get-secret';
 
-import type { ApiErrorResponse, Method } from 'globals';
+import type { ApiErrorResponse, ApiTokenRequest, Method } from 'globals';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export function errorResponse(
@@ -38,6 +39,32 @@ export async function checkAuth(req: NextApiRequest) {
 		throw new AuthError();
 	}
 	return session;
+}
+
+export async function checkToken(req: ApiTokenRequest) {
+	const {
+		query: { forceAuth, token: queryToken },
+		headers: { authorization },
+	} = req;
+
+	// Dev mode does not need validation.
+	if (process.env.NODE_ENV === 'development' && forceAuth !== 'true') {
+		return;
+	}
+
+	// TODO: Set up JWT instead.
+	try {
+		const expectedToken = getSecret('API_SECRET');
+		let token = queryToken;
+		if (!token && authorization?.startsWith('BEARER')) {
+			token = authorization.trim().replace('BEARER ', '');
+		}
+		if (token !== expectedToken) {
+			throw new AuthError();
+		}
+	} catch (err) {
+		throw new AuthError();
+	}
 }
 
 export function queryToNum(

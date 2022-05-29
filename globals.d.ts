@@ -1,7 +1,8 @@
 /// <reference types="node" />
-import { NextApiResponse, GetStaticPropsResult } from 'next';
+import { NextApiResponse, NextApiRequest, GetStaticPropsResult } from 'next';
 
 type EnvKeys =
+	| 'API_SECRET'
 	| 'VALID_EMAILS'
 	| 'NEXTAUTH_SECRET'
 	| 'GOOGLE_CLIENT_ID'
@@ -29,7 +30,15 @@ interface Image {
 }
 
 // API
-export type Method = 'GET' | 'POST' | 'PUT';
+type Method = 'GET' | 'POST' | 'PUT';
+
+interface ApiTokenRequest extends NextApiRequest {
+	query: {
+		token?: string;
+		forceAuth?: 'true';
+	};
+}
+
 export type ApiResponse<Response extends ApiSuccessResponse> = NextApiResponse<
 	Response | ApiErrorResponse
 >;
