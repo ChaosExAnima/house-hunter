@@ -44,6 +44,11 @@ export default class SheetData extends CachedData {
 		return super.init();
 	}
 
+	public get allListings() {
+		this.initCheck();
+		return this.listings;
+	}
+
 	public get activeListings() {
 		this.initCheck();
 		return this.filteredListings(this.listings);

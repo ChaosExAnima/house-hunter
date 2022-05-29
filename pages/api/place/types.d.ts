@@ -12,6 +12,11 @@ export interface PlaceIndex extends ApiSuccessResponse {
 	places: Listing[];
 }
 
+export interface PlaceDetailRequest extends NextApiRequest {
+	query: {
+		id: string;
+	};
+}
 export interface PlaceDetail extends ApiSuccessResponse {
 	place: Listing;
 }
