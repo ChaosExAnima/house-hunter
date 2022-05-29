@@ -99,11 +99,12 @@ export default class SheetData {
 		}
 		return {
 			id: createHash('sha256').update(id).digest('base64'),
+			row: row.rowIndex,
 			address: row.Address?.trim(),
 			slug: slugify((row.Address ?? id).trim()),
 			status: active ? 'active' : 'veto',
 			links: [row.Link, row['Second link']].filter(Boolean) as string[],
-			price: row.Price ?? 0,
+			price: row.Price,
 			contact: row['Person In Contact'],
 		};
 	}

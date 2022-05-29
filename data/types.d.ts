@@ -17,8 +17,9 @@ export interface SheetListing extends GoogleSpreadsheetRow {
 
 export interface RowListing {
 	id: string;
+	row: number;
 	address?: string;
-	slug?: string;
+	slug: string;
 	status: ListingStatus;
 	links: string[];
 	price?: number;
@@ -27,11 +28,7 @@ export interface RowListing {
 }
 
 export interface Listing extends RowListing {
-	id: string;
 	address: string;
-	slug: string;
-	status: ListingStatus;
-	links: string[];
 	price: number;
 	bedrooms?: number;
 	bathrooms?: number;
