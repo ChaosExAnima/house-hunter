@@ -6,7 +6,7 @@ export interface SheetListing extends GoogleSpreadsheetRow {
 	Link?: string;
 	'Second link'?: string;
 	Address?: string;
-	Price?: number;
+	Price?: string;
 	'Agent / Has Fee'?: string;
 	'Person In Contact'?: string;
 }

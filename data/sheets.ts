@@ -75,18 +75,19 @@ export default class SheetData extends CachedData {
 				continue;
 			}
 
-			// Figure out if this is an active listing.
-			let active = true;
-			if (this.breakRow && this.breakRow < row.rowIndex) {
-				active = false;
-			}
-
 			// Set the break row if it's not already set.
 			if (
 				!this.breakRow &&
 				row.Link.toLowerCase() === this.ROW_BREAK_TEXT
 			) {
 				this.breakRow = row.rowIndex;
+				continue;
+			}
+
+			// Figure out if this is an active listing.
+			let active = true;
+			if (this.breakRow < row.rowIndex) {
+				active = false;
 			}
 			try {
 				const listing = this.rowToListing(row, active);
@@ -99,19 +100,21 @@ export default class SheetData extends CachedData {
 		return this;
 	}
 
-	protected rowToListing(row: SheetListing, active: boolean): RowListing {
+	private rowToListing(row: SheetListing, active: boolean): RowListing {
 		const id = row.Link ?? row['Second link'] ?? row.Address;
 		if (!id) {
 			throw new Error(`Could not parse row: ${JSON.stringify(row)}`);
 		}
 		return {
-			id: createHash('sha256').update(id).digest('base64'),
+			id: createHash('sha256').update(id).digest('hex'),
 			row: row.rowIndex,
 			address: row.Address?.trim(),
 			slug: slugify((row.Address ?? id).trim()),
 			status: active ? 'active' : 'veto',
 			links: [row.Link, row['Second link']].filter(Boolean) as string[],
-			price: row.Price,
+			price: Number.parseFloat(
+				row.Price?.replace(/[^0-9\.-]*/g, '') ?? '0',
+			),
 			contact: row['Person In Contact'],
 			comments: {},
 			ratings: {},
