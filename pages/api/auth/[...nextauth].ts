@@ -16,7 +16,7 @@ const secret = getSecret('NEXTAUTH_SECRET');
 export default NextAuth({
 	secret,
 	adapter: UpstashRedisAdapter(redis, {
-		baseKeyPrefix: getSecret('UPSTASH_REDIS_REST_PREFIX'),
+		baseKeyPrefix: getSecret('UPSTASH_REDIS_REST_PREFIX') + ':',
 	}),
 	providers: [
 		GoogleProvider({
