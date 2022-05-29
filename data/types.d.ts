@@ -1,9 +1,5 @@
 import { GoogleSpreadsheetRow } from 'google-spreadsheet';
 
-export interface Person {
-	name: string;
-}
-
 export type ListingStatus = 'active' | 'gone' | 'veto';
 
 export interface SheetListing extends GoogleSpreadsheetRow {
@@ -18,26 +14,25 @@ export interface SheetListing extends GoogleSpreadsheetRow {
 export interface RowListing {
 	id: string;
 	row: number;
-	address?: string;
 	slug: string;
 	status: ListingStatus;
 	links: string[];
+	address?: string;
 	price?: number;
 	neighborhood?: string;
 	contact?: string;
+	comments: Record<string, string[]>;
+	ratings: Record<string, number>;
+	images: Image[];
+	agent?: string;
+	fee?: number;
 }
 
 export interface Listing extends RowListing {
 	address: string;
 	price: number;
+	neighborhood: string;
 	bedrooms?: number;
 	bathrooms?: number;
 	sqfeet?: number;
-	neighborhood: string;
-	images: Image[];
-	agent?: string;
-	fee?: number;
-	contact?: Person;
-	comments: Record<string, string[]>;
-	ratings: Record<string, number>;
 }

@@ -1,4 +1,4 @@
-import listings from 'data/listing-fixtures';
+import SheetData from 'data/sheets';
 import { checkAuth, checkMethod, errorResponse } from 'utils/api';
 
 import type { PlaceIndex } from './types';
@@ -12,9 +12,15 @@ export default async function placeHandler(
 	try {
 		checkMethod(req);
 		await checkAuth(req);
+		const sheet = await new SheetData().init();
 		res.json({
 			error: false,
-			places: listings,
+			places: sheet.activeListings.map((listing) => ({
+				address: '',
+				price: 0,
+				neighborhood: 'NYC',
+				...listing,
+			})),
 		});
 	} catch (err) {
 		errorResponse(err, res);

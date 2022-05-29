@@ -7,4 +7,6 @@ const redis = new Redis({
 	token: getSecret('UPSTASH_REDIS_REST_TOKEN'),
 });
 
+export const cachePrefix = getSecret('UPSTASH_REDIS_REST_PREFIX');
+
 export default redis;
