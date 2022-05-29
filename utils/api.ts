@@ -23,6 +23,7 @@ export function errorResponse(
 		error: true,
 		message,
 	});
+	console.error('API Error:', error);
 }
 
 export function checkMethod(req: NextApiRequest, method: Method = 'GET') {

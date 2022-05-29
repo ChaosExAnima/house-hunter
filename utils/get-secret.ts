@@ -3,7 +3,7 @@ import mem from 'mem';
 
 import type { EnvKeys } from 'globals';
 
-export function getSecret(key: EnvKeys): string {
+function getSecret(key: EnvKeys, fallback?: string): string {
 	let secret = process.env[key];
 	if (!secret) {
 		const file = process.env[`${key}_FILE`];
@@ -11,13 +11,17 @@ export function getSecret(key: EnvKeys): string {
 			try {
 				secret = readFileSync(file, 'utf-8');
 			} catch (err) {
+				if (fallback) {
+					return fallback;
+				}
 				throw new Error(`Secret "${key}" not readable`);
 			}
-		} else {
+		} else if (!fallback) {
 			throw new Error(`Secret "${key}" not set`);
 		}
 	}
-	return secret || '';
+
+	return secret ?? (fallback || '');
 }
 
 export default mem(getSecret);

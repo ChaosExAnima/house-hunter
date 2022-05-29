@@ -29,3 +29,6 @@ yarn-error.log*
 # VSCode
 .vscode
 *.code-workspace
+
+# Secrets
+google.key

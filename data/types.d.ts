@@ -1,24 +1,38 @@
-export interface Person {
-	name: string;
-}
+import { GoogleSpreadsheetRow } from 'google-spreadsheet';
 
 export type ListingStatus = 'active' | 'gone' | 'veto';
 
-export interface Listing {
+export interface SheetListing extends GoogleSpreadsheetRow {
+	Link?: string;
+	'Second link'?: string;
+	Address?: string;
+	Price?: string;
+	'Agent / Has Fee'?: string;
+	'Person In Contact'?: string;
+}
+
+export interface RowListing {
 	id: string;
-	address: string;
+	row: number;
 	slug: string;
 	status: ListingStatus;
 	links: string[];
-	price: number;
-	bedrooms?: number;
-	bathrooms?: number;
-	sqfeet?: number;
-	neighborhood: string;
+	address?: string;
+	price?: number;
+	neighborhood?: string;
+	contact?: string;
+	comments: Record<string, string[]>;
+	ratings: Record<string, number>;
 	images: Image[];
 	agent?: string;
 	fee?: number;
-	contact?: Person;
-	comments: Record<string, string[]>;
-	ratings: Record<string, number>;
+}
+
+export interface Listing extends RowListing {
+	address: string;
+	price: number;
+	neighborhood: string;
+	bedrooms?: number;
+	bathrooms?: number;
+	sqfeet?: number;
 }

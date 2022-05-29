@@ -1,11 +1,14 @@
 /// <reference types="node" />
-import { NextApiResponse } from 'next';
+import { NextApiResponse, GetStaticPropsResult } from 'next';
 
 type EnvKeys =
 	| 'VALID_EMAILS'
 	| 'NEXTAUTH_SECRET'
 	| 'GOOGLE_CLIENT_ID'
 	| 'GOOGLE_CLIENT_SECRET'
+	| 'GOOGLE_SHEET_ID'
+	| 'GOOGLE_SERVICE_EMAIL'
+	| 'GOOGLE_SERVICE_KEY'
 	| 'NEXT_PUBLIC_BUDGET'
 	| 'UPSTASH_REDIS_REST_URL'
 	| 'UPSTASH_REDIS_REST_TOKEN'
@@ -29,6 +32,11 @@ interface Image {
 export type Method = 'GET' | 'POST' | 'PUT';
 export type ApiResponse<Response extends ApiSuccessResponse> = NextApiResponse<
 	Response | ApiErrorResponse
+>;
+
+// Pages
+export type StaticPropsResult<Props = {}> = Promise<
+	GetStaticPropsResult<Props>
 >;
 
 interface ApiResponseBase {

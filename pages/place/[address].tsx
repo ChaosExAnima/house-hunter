@@ -17,12 +17,13 @@ import LinkList from 'components/link-list';
 import { Loading } from 'components/loading-context';
 import Page from 'components/page';
 import Price from 'components/price';
+import ScrapedData from 'data/scraped';
 import { Listing } from 'data/types';
 import { fetchApi } from 'utils/fetch';
 import { useSessionCheck } from 'utils/hooks';
 import { currency } from 'utils/text';
 
-import type { PlaceDetailsProps } from './types';
+import type { PlaceDetailsContext, PlaceDetailsProps } from './types';
 import type {
 	GetStaticPathsResult,
 	GetStaticPropsContext,
@@ -120,7 +121,7 @@ export default function PlaceDetails({
 }
 
 export async function getStaticProps(
-	context: GetStaticPropsContext<{ address: string }>,
+	context: GetStaticPropsContext<PlaceDetailsContext>,
 ): Promise<GetStaticPropsResult<PlaceDetailsProps>> {
 	if (!context.params?.address) {
 		return {
@@ -133,8 +134,9 @@ export async function getStaticProps(
 			notFound: true,
 		};
 	}
-	const { default: listings } = await import('data/listing-fixtures');
-	const listing = listings.find(({ slug }) => slug === address);
+	const data = await new ScrapedData().init();
+	const listing = data.getBySlug(address.trim());
+
 	if (!listing) {
 		return {
 			notFound: true,
@@ -148,10 +150,11 @@ export async function getStaticProps(
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-	const { default: listings } = await import('data/listing-fixtures');
+	const data = await new ScrapedData().init();
+	const paths = data.listings.map(({ slug }) => slug && `/place/${slug}`);
 	return {
-		paths: listings.map(({ slug }) => `/place/${slug}`),
-		fallback: true,
+		paths,
+		fallback: 'blocking',
 	};
 }
 

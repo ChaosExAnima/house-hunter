@@ -1,19 +1,19 @@
-import listings from 'data/listing-fixtures';
+import ScrapedData from 'data/scraped';
 import { checkAuth, checkMethod, errorResponse } from 'utils/api';
 import { StatusError } from 'utils/errors';
 
-import type { PlaceDetail } from '../types';
+import type { PlaceDetail, PlaceDetailRequest } from '../types';
 import type { ApiResponse } from 'globals';
-import type { NextApiRequest } from 'next';
 
 export default async function placeAddressHandler(
-	req: NextApiRequest,
+	req: PlaceDetailRequest,
 	res: ApiResponse<PlaceDetail>,
 ) {
 	try {
 		checkMethod(req);
 		await checkAuth(req);
-		const place = listings.find(({ id }) => id === req.query.id);
+		const data = await new ScrapedData().init();
+		const place = data.listings.find(({ id }) => id === req.query.id);
 		if (!place) {
 			throw new StatusError('Could not find listing', 404);
 		}
