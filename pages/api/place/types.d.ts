@@ -5,7 +5,9 @@ import { Listing } from 'data/types';
 
 export interface PlaceIndexRequest extends NextApiRequest {
 	query: {
-		active?: string;
+		status?: 'active' | 'old' | 'all';
+		limit?: string;
+		offset?: string;
 	};
 }
 export interface PlaceIndex extends ApiSuccessResponse {

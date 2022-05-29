@@ -1,17 +1,13 @@
 import { Skeleton, Stack } from '@mui/material';
-import { useQuery } from 'react-query';
 
 import ErrorDisplay from 'components/error-display';
 import ListingCard from 'components/listing-card';
-import { fetchApi } from 'utils/fetch';
+import { usePlaces } from 'components/query-hooks';
 
 import type { ListingListProps } from './types';
-import type { PlaceIndex } from 'pages/api/place/types';
 
 export default function ListingList({ height, limit = 10 }: ListingListProps) {
-	const { data, error, status } = useQuery(`/place?limit=${limit}`, () =>
-		fetchApi<PlaceIndex>(`/place?limit=${limit}`),
-	);
+	const { data, error, status } = usePlaces({ limit });
 	if (status === 'loading' || status === 'idle') {
 		return (
 			<Stack spacing={2}>

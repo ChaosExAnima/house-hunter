@@ -6,7 +6,6 @@ import {
 } from '@mui/icons-material';
 import { Alert, Skeleton, Typography } from '@mui/material';
 import { useMemo } from 'react';
-import { useQuery } from 'react-query';
 
 import Breadcrumbs from 'components/breadcrumbs';
 import DetailsList from 'components/details-list';
@@ -17,28 +16,25 @@ import LinkList from 'components/link-list';
 import { Loading } from 'components/loading-context';
 import Page from 'components/page';
 import Price from 'components/price';
+import { usePlaceDetails } from 'components/query-hooks';
 import ListingData from 'data/listing';
-import { Listing } from 'data/types';
-import { fetchApi } from 'utils/fetch';
 import { useSessionCheck } from 'utils/hooks';
 import { currency } from 'utils/text';
 
 import type { PlaceDetailsContext, PlaceDetailsProps } from './types';
+import type { Listing } from 'data/types';
 import type {
 	GetStaticPathsResult,
 	GetStaticPropsContext,
 	GetStaticPropsResult,
-	InferGetStaticPropsType,
 } from 'next';
-import type { PlaceDetail } from 'pages/api/place/types';
 
 export default function PlaceDetails({
 	id,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+	place: prefetchPlace,
+}: PlaceDetailsProps) {
 	const isLoggedIn = useSessionCheck();
-	const { status, data, error } = useQuery(`/place/${id}`, () =>
-		fetchApi<PlaceDetail>(`/place/${id}`),
-	);
+	const { status, data, error } = usePlaceDetails(id, prefetchPlace);
 	const priceSubtext = useMemo(() => {
 		const budget = Number.parseInt(
 			process.env.NEXT_PUBLIC_BUDGET ?? '5000',
@@ -145,6 +141,7 @@ export async function getStaticProps(
 	return {
 		props: {
 			id: listing.id,
+			place: listing,
 		},
 	};
 }
