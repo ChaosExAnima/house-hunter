@@ -1,26 +1,26 @@
-import SheetData from 'data/sheets';
+import ScrapedData from 'data/scraped';
 import { checkAuth, checkMethod, errorResponse } from 'utils/api';
 
-import type { PlaceIndex } from './types';
+import type { PlaceIndex, PlaceIndexRequest } from './types';
 import type { ApiResponse } from 'globals';
-import type { NextApiRequest } from 'next';
 
 export default async function placeHandler(
-	req: NextApiRequest,
+	req: PlaceIndexRequest,
 	res: ApiResponse<PlaceIndex>,
 ) {
 	try {
 		checkMethod(req);
 		await checkAuth(req);
-		const sheet = await new SheetData().init();
+		const {
+			query: { active },
+		} = req;
+		const listings = await new ScrapedData().init();
 		res.json({
 			error: false,
-			places: sheet.activeListings.map((listing) => ({
-				address: '',
-				price: 0,
-				neighborhood: 'NYC',
-				...listing,
-			})),
+			places:
+				active !== 'false'
+					? listings.activeListings
+					: listings.oldListings,
 		});
 	} catch (err) {
 		errorResponse(err, res);

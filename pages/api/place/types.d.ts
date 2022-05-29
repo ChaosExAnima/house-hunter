@@ -1,7 +1,13 @@
 import { ApiSuccessResponse } from 'globals';
+import { NextApiRequest } from 'next';
 
 import { Listing } from 'data/types';
 
+export interface PlaceIndexRequest extends NextApiRequest {
+	query: {
+		active?: string;
+	};
+}
 export interface PlaceIndex extends ApiSuccessResponse {
 	places: Listing[];
 }
