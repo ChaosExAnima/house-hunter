@@ -1,4 +1,4 @@
-import ScrapedData from 'data/scraped';
+import ListingData from 'data/listing';
 import { checkAuth, checkMethod, errorResponse } from 'utils/api';
 import { StatusError } from 'utils/errors';
 
@@ -12,7 +12,7 @@ export default async function placeAddressHandler(
 	try {
 		checkMethod(req);
 		await checkAuth(req);
-		const data = await new ScrapedData().init();
+		const data = await new ListingData().init();
 		const place = data.listings.find(({ id }) => id === req.query.id);
 		if (!place) {
 			throw new StatusError('Could not find listing', 404);

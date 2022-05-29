@@ -5,7 +5,7 @@ import SheetData from './sheets';
 
 import type { Listing, RowListing } from './types';
 
-export default class ScrapedData extends Data {
+export default class ListingData extends Data {
 	public listings: Listing[] = [];
 	public activeListings: Listing[] = [];
 	public oldListings: Listing[] = [];

@@ -1,4 +1,4 @@
-import ScrapedData from 'data/scraped';
+import ListingData from 'data/listing';
 import { checkAuth, checkMethod, errorResponse } from 'utils/api';
 
 import type { PlaceIndex, PlaceIndexRequest } from './types';
@@ -14,7 +14,7 @@ export default async function placeHandler(
 		const {
 			query: { active },
 		} = req;
-		const listings = await new ScrapedData().init();
+		const listings = await new ListingData().init();
 		res.json({
 			error: false,
 			places:

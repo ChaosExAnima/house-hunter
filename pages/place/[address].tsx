@@ -17,7 +17,7 @@ import LinkList from 'components/link-list';
 import { Loading } from 'components/loading-context';
 import Page from 'components/page';
 import Price from 'components/price';
-import ScrapedData from 'data/scraped';
+import ListingData from 'data/listing';
 import { Listing } from 'data/types';
 import { fetchApi } from 'utils/fetch';
 import { useSessionCheck } from 'utils/hooks';
@@ -134,7 +134,7 @@ export async function getStaticProps(
 			notFound: true,
 		};
 	}
-	const data = await new ScrapedData().init();
+	const data = await new ListingData().init();
 	const listing = data.getBySlug(address.trim());
 
 	if (!listing) {
@@ -150,7 +150,7 @@ export async function getStaticProps(
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-	const data = await new ScrapedData().init();
+	const data = await new ListingData().init();
 	const paths = data.listings.map(({ slug }) => slug && `/place/${slug}`);
 	return {
 		paths,
