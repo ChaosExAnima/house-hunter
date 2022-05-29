@@ -24,12 +24,15 @@ export default class ScrapedData extends Data {
 
 	public async refresh(): Promise<this> {
 		await this.sheets.refresh();
-		this.listings = this.sheets.allListings.map(this.rowToListing);
 		for (const rowListing of this.sheets.allListings) {
 			const listing = this.rowToListing(rowListing);
-			if (listing.address && listing.status === 'active') {
+			if (!listing.address) {
+				continue;
+			}
+			this.listings.push(listing);
+			if (listing.status === 'active') {
 				this.activeListings.push(listing);
-			} else if (listing.address) {
+			} else {
 				this.oldListings.push(listing);
 			}
 		}

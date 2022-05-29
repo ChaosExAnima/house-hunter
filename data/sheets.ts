@@ -63,7 +63,6 @@ export default class SheetData extends CachedData {
 		this.initCheck();
 		const cachedRows = await this.getCache<RowListing[]>('listings');
 		if (cachedRows) {
-			console.log(`Loaded ${cachedRows.length} from cache`);
 			this.listings = cachedRows;
 			return this;
 		}
@@ -85,16 +84,18 @@ export default class SheetData extends CachedData {
 			}
 
 			// Figure out if this is an active listing.
-			let active = true;
-			if (this.breakRow < row.rowIndex) {
-				active = false;
-			}
 			try {
-				const listing = this.rowToListing(row, active);
+				const listing = this.rowToListing(
+					row,
+					this.breakRow < row.rowIndex,
+				);
 				this.listings.push(listing);
 			} catch (err) {
 				console.warn('Sheet refresh error:', err);
 			}
+		}
+		if (!this.breakRow) {
+			console.warn('Break row not set!');
 		}
 		await this.setCache('listings', this.listings);
 		return this;
@@ -107,7 +108,6 @@ export default class SheetData extends CachedData {
 		}
 		const id = createHash('sha256').update(uniq).digest('hex');
 		const slug = slugify((row.Address || id).trim());
-		// console.info(`Reading row ${row.rowIndex} of ${row.Address}: ${slug}`);
 
 		return {
 			id,

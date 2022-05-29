@@ -39,3 +39,21 @@ export async function checkAuth(req: NextApiRequest) {
 	}
 	return session;
 }
+
+export function queryToNum(
+	query?: string,
+	fallback = 0,
+	allowNegative = false,
+): number {
+	if (!query) {
+		return fallback;
+	}
+	const number = Number.parseInt(query);
+	if (!Number.isFinite(number)) {
+		throw new StatusError('Non-numeric query param', 400);
+	}
+	if (!allowNegative && number < 0) {
+		throw new StatusError('Query param cannot be negative', 400);
+	}
+	return number;
+}
