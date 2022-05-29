@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { NextApiResponse } from 'next';
+import { NextApiResponse, GetStaticPropsResult } from 'next';
 
 type EnvKeys =
 	| 'VALID_EMAILS'
@@ -32,6 +32,11 @@ interface Image {
 export type Method = 'GET' | 'POST' | 'PUT';
 export type ApiResponse<Response extends ApiSuccessResponse> = NextApiResponse<
 	Response | ApiErrorResponse
+>;
+
+// Pages
+export type StaticPropsResult<Props = {}> = Promise<
+	GetStaticPropsResult<Props>
 >;
 
 interface ApiResponseBase {

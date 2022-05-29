@@ -101,15 +101,19 @@ export default class SheetData extends CachedData {
 	}
 
 	private rowToListing(row: SheetListing, active: boolean): RowListing {
-		const id = row.Link ?? row['Second link'] ?? row.Address;
-		if (!id) {
+		const uniq = row.Link ?? row['Second link'] ?? row.Address;
+		if (!uniq) {
 			throw new Error(`Could not parse row: ${JSON.stringify(row)}`);
 		}
+		const id = createHash('sha256').update(uniq).digest('hex');
+		const slug = slugify((row.Address || id).trim());
+		// console.info(`Reading row ${row.rowIndex} of ${row.Address}: ${slug}`);
+
 		return {
-			id: createHash('sha256').update(id).digest('hex'),
+			id,
+			slug,
 			row: row.rowIndex,
 			address: row.Address?.trim(),
-			slug: slugify((row.Address ?? id).trim()),
 			status: active ? 'active' : 'veto',
 			links: [row.Link, row['Second link']].filter(Boolean) as string[],
 			price: Number.parseFloat(

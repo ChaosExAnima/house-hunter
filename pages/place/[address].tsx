@@ -151,10 +151,10 @@ export async function getStaticProps(
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const data = await new ScrapedData().init();
-	const paths = data.listings.map(({ slug }) => `/place/${slug}`);
+	const paths = data.listings.map(({ slug }) => slug && `/place/${slug}`);
 	return {
 		paths,
-		fallback: true,
+		fallback: 'blocking',
 	};
 }
 
