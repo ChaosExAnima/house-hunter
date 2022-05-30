@@ -17,8 +17,9 @@ export default abstract class CachedData extends Data {
 		this.redis = redis;
 	}
 
-	protected async getCache<Output = Record<string, unknown>>(
+	protected async getCache<Output = any>(
 		key: string,
+		prefix = this.prefix,
 	): Promise<Output | null> {
 		if (!this.useCache) {
 			return null;
@@ -26,28 +27,64 @@ export default abstract class CachedData extends Data {
 			this.bypassTimes--;
 			return null;
 		}
-		return this.redis.get(this.cacheKey(key));
+		return this.redis.get(this.cacheKey(key, prefix));
 	}
 
-	protected async setCache<Value = any>(
+	protected setCache<Value = any>(
 		key: string,
 		value: Value,
 		ttl = this.defaultTtl,
+		prefix = this.prefix,
 	): Promise<Value | null> {
-		return this.redis.set(this.cacheKey(key), value, {
+		return this.redis.set(this.cacheKey(key, prefix), value, {
 			ex: ttl,
 		});
 	}
 
-	protected async clearCache(key: string) {
-		await this.redis.del(this.cacheKey(key));
+	protected async clearCache(key: string, prefix = this.prefix) {
+		await this.redis.del(this.cacheKey(key, prefix));
+	}
+
+	protected insertCacheMap<Value = any>(
+		key: string,
+		map: Record<string, Value>,
+		prefix = this.prefix,
+	) {
+		return this.redis.hset(this.cacheKey(key, prefix), map);
+	}
+
+	protected async getCacheMapValue<Output = any>(
+		key: string,
+		field: string,
+		prefix = this.prefix,
+	): Promise<Output | null> {
+		if (!this.useCache) {
+			return null;
+		} else if (this.bypassTimes > 0) {
+			this.bypassTimes--;
+			return null;
+		}
+		return this.redis.hget(this.cacheKey(key, prefix), field);
+	}
+
+	protected async getCacheMap<Output = any>(
+		key: string,
+		prefix = this.prefix,
+	): Promise<Record<string, Output> | null> {
+		if (!this.useCache) {
+			return null;
+		} else if (this.bypassTimes > 0) {
+			this.bypassTimes--;
+			return null;
+		}
+		return this.redis.hvals(this.cacheKey(key, prefix));
 	}
 
 	protected bypassCache(times = 1) {
 		this.bypassTimes += times;
 	}
 
-	private cacheKey(key: string) {
-		return `${cachePrefix}:${this.prefix}:${key}`;
+	private cacheKey(key: string, prefix: string) {
+		return `${cachePrefix}:${prefix}:${key}`;
 	}
 }

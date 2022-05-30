@@ -1,4 +1,3 @@
-import RemoteData from 'data/remote';
 import StreetEasyData from 'data/streeteasy';
 import { checkMethod, checkToken, errorResponse } from 'utils/api';
 import { StatusError } from 'utils/errors';
@@ -14,14 +13,14 @@ export default async function jobCreateHandler(
 		checkMethod(req);
 		checkToken(req);
 		const {
-			query: { type, target },
+			query: { type, target, listing },
 		} = req;
-		let handler: RemoteData;
+		let handler;
 		let id: string;
 		switch (type) {
 			case 'streeteasy':
 				handler = new StreetEasyData();
-				id = handler.enqueue(target).id;
+				id = handler.enqueue(target, listing).id;
 				break;
 			default:
 				throw new StatusError(`Invalid job type ${type}`, 400);

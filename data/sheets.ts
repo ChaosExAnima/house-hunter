@@ -89,6 +89,11 @@ export default class SheetData extends CachedData {
 					row,
 					this.breakRow < row.rowIndex,
 				);
+				await this.insertCacheMap(
+					'rows',
+					{ [listing.id]: listing },
+					'global',
+				);
 				this.listings.push(listing);
 			} catch (err) {
 				console.warn('Sheet refresh error:', err);

@@ -4,6 +4,7 @@ interface JobCreateRequest extends ApiTokenRequest {
 	query: {
 		type: 'streeteasy';
 		target: string;
+		listing: string;
 		token?: string;
 		forceAuth?: 'true';
 	};

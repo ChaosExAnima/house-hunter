@@ -53,4 +53,5 @@ interface RemoteJob extends Job {
 
 interface StreetEasyJob extends RemoteJob {
 	type: 'streeteasy';
+	listing: string;
 }

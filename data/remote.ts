@@ -12,7 +12,7 @@ export default abstract class RemoteData extends CachedData {
 	protected jobs: RemoteJob[] = [];
 	protected readonly defaultTtl = HOUR_IN_SECONDS * 6;
 
-	public enqueue(path: string) {
+	public enqueue(path: string): RemoteJob {
 		const target = new URL(path, `https://${this.domain}`).toString();
 
 		const job = {
