@@ -41,7 +41,7 @@ export async function checkAuth(req: NextApiRequest) {
 	return session;
 }
 
-export async function checkToken(req: ApiTokenRequest) {
+export function checkToken(req: ApiTokenRequest) {
 	const {
 		query: { forceAuth, token: queryToken },
 		headers: { authorization },

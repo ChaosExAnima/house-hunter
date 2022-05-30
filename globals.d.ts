@@ -3,6 +3,7 @@ import { NextApiResponse, NextApiRequest, GetStaticPropsResult } from 'next';
 
 type EnvKeys =
 	| 'API_SECRET'
+	| 'DISABLE_CACHE'
 	| 'VALID_EMAILS'
 	| 'NEXTAUTH_SECRET'
 	| 'GOOGLE_CLIENT_ID'

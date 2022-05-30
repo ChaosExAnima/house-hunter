@@ -1,8 +1,11 @@
 import { ApiSuccessResponse, ApiTokenRequest } from 'globals';
 
 interface JobCreateRequest extends ApiTokenRequest {
-	body: {
-		type?: string;
+	query: {
+		type: 'streeteasy';
+		target: string;
+		token?: string;
+		forceAuth?: 'true';
 	};
 }
 

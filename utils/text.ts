@@ -1,3 +1,5 @@
+import { BinaryLike, createHash } from 'crypto';
+
 export function slugify(input: string): string {
 	return input
 		.trim()
@@ -13,4 +15,8 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 export function currency(input: number): string {
 	return formatter.format(input);
+}
+
+export function sha256(input: BinaryLike): string {
+	return createHash('sha256').update(input).digest('hex');
 }
