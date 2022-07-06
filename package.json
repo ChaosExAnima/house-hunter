@@ -23,7 +23,7 @@
 		"js-cookie": "^3.0.1",
 		"mem": "^9.0.2",
 		"next": "12.1.6",
-		"next-auth": "^4.3.4",
+		"next-auth": "^4.9.0",
 		"react": "18.1.0",
 		"react-dom": "18.1.0",
 		"react-mui-carousel-artemm": "^3.3.8",
