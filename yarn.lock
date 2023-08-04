@@ -311,10 +311,10 @@
     prop-types "^15.8.1"
     react-is "^17.0.2"
 
-"@next-auth/upstash-redis-adapter@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@next-auth/upstash-redis-adapter/-/upstash-redis-adapter-3.0.0.tgz#ddde7a141e6e48e1a0143e71c7060b871d4706b9"
-  integrity sha512-MQIM03nJKNkr9KK0AWH4rDuFeCTaFtvD++l30hfJIyPZUV4STL4GX3TYTbOEOgCcw/AiGHTLhNXGk5/CDJJ3kg==
+"@next-auth/upstash-redis-adapter@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@next-auth/upstash-redis-adapter/-/upstash-redis-adapter-3.0.2.tgz#9af910fc5f9a720ee2bb5ec886373941484ac585"
+  integrity sha512-epzJAYrhDy4aKtg5VoGthCaZa5Wwj7ZXCjYEuzeuuii+bcC5S/Bf5k1Qgv+Ygs/Rc761h+7Yr1MTU1KxbOerfA==
   dependencies:
     uuid "^8.3.2"
 

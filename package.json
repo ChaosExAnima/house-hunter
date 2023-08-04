@@ -15,7 +15,7 @@
 		"@emotion/styled": "^11.8.1",
 		"@mui/icons-material": "^5.8.0",
 		"@mui/material": "^5.8.1",
-		"@next-auth/upstash-redis-adapter": "^3.0.0",
+		"@next-auth/upstash-redis-adapter": "^3.0.2",
 		"@upstash/redis": "^1.4.0",
 		"classnames": "^2.3.1",
 		"dotenv": "^16.0.1",
